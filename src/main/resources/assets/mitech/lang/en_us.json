@@ -1,7 +1,15 @@
 {
  "item.mitech.neutron_ingot": "Neutron Ingot",
+ "item.mitech.super_ingot": "Super Ingot",
+ "item.mitech.sampler": "Sampler",
+
  "block.mitech.neutron_block": "Neutron Block",
+ "block.mitech.collector": "Neutron Collector",
+
+ "tooltip.mitech.super_ingot_0": "This item will help satisfy your hunger. Can work passively without using anything",
+ "tooltip.mitech.super_ingot_1": "Can work actively, spending the durability of the item, but replenishes a lot of hunger at once",
 
  "itemGroup.mitech.items": "MiTech Items",
  "itemGroup.mitech.blocks": "MiTech Blocks"
+
 }

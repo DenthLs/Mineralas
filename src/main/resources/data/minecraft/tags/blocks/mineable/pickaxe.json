@@ -1,6 +1,7 @@
 {
   "replace": false,
   "values": [
-    "mitech:neutron_block"
+    "mitech:neutron_block",
+    "mitech:collector"
   ]
 }
