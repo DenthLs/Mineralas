@@ -1,0 +1,13 @@
+{
+  "required": true,
+  "package": "net.denthls.mitech.mixin",
+  "compatibilityLevel": "JAVA_17",
+  "mixins": [
+  ],
+  "client": [
+    "MiTechMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}

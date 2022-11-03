@@ -1,0 +1,40 @@
+{
+  "schemaVersion": 1,
+  "id": "mitech",
+  "version": "1.0.0",
+
+  "name": "MiTech",
+  "description": "Addon to Tech Reborn",
+  "authors": [
+    "DenthLs"
+  ],
+  "contact": {
+    "homepage": "Empty for a while",
+    "sources": "Empty for a while"
+  },
+
+  "license": "MIT",
+  "icon": "assets/mitech/icon.png",
+
+  "environment": "*",
+  "entrypoints": {
+    "main": [
+      {
+       "adapter": "kotlin",
+        "value": "net.denthls.mitech.MiTech"
+      }
+    ]
+  },
+  "mixins": [
+    "mitech.mixins.json"
+  ],
+  "depends": {
+    "fabricloader": ">=0.14.10",
+    "fabric": "*",
+    "fabric-language-kotlin": "*",
+    "minecraft": "1.19.2"
+  },
+  "suggests": {
+    "flamingo": "*"
+  }
+}

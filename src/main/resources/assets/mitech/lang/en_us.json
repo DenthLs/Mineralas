@@ -1,0 +1,7 @@
+{
+ "item.mitech.neutron_ingot": "Neutron Ingot",
+ "block.mitech.neutron_block": "Neutron Block",
+
+ "itemGroup.mitech.items": "MiTech Items",
+ "itemGroup.mitech.blocks": "MiTech Blocks"
+}
