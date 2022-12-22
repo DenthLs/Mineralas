@@ -1,4 +1,4 @@
-package net.denthls.mitech.mixin;
+package net.denthls.mineralas.mixin;
 
 import net.minecraft.client.gui.screen.TitleScreen;
 import org.spongepowered.asm.mixin.Mixin;

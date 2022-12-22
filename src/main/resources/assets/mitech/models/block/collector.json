@@ -1,9 +1,0 @@
-{
-  "parent": "minecraft:block/orientable",
-  "textures": {
-    "bottom": "mitech:block/collector_side",
-    "front": "mitech:block/collector_front_idle",
-    "side": "mitech:block/collector_side",
-    "top": "mitech:block/collector_top"
-  }
-}

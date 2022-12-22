@@ -1,0 +1,12 @@
+{
+  "itemGroup.mineralas.items": "Mineralas Предметы",
+  "itemGroup.mineralas.samples": "Mineralas Образцы",
+  "itemGroup.mineralas.ores": "Mineralas Руды",
+  "block.mineralas.hematite_ore_sample": "Образец гематита",
+  "block.mineralas.hematite_ore": "Руда гематита",
+  "item.mineralas.sampler": "Сборщик пробы",
+  "item.mineralas.sampler.no_valuables": "Нет руд",
+  "item.mineralas.sampler.tooltip_0": "Нажмите Shift для получения информации",
+  "item.mineralas.sampler.tooltip_1": "Нажмите на блок для использования",
+  "item.mineralas.sampler.tooltip_2": "Показывает информацию о рудах на 64 блока вниз"
+}

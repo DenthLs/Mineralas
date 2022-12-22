@@ -1,0 +1,13 @@
+{
+  "required": true,
+  "package": "net.denthls.mineralas.mixin",
+  "compatibilityLevel": "JAVA_17",
+  "mixins": [
+  ],
+  "client": [
+    "MnMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}
