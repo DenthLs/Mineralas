@@ -1,6 +1,6 @@
 package net.denthls.mitech.item.custom
 
-import net.denthls.mitech.item.ModItems
+import net.denthls.mitech.item.MItems
 import net.minecraft.client.gui.screen.Screen
 import net.minecraft.client.item.TooltipContext
 import net.minecraft.entity.Entity
@@ -23,10 +23,14 @@ class SuperIngot(settings: Settings?) : Item(settings) {
         var coolDown = 1
     override fun inventoryTick(stack: ItemStack, world: World, entity: Entity, slot: Int, selected: Boolean) {
         if (!world.isClient) {
-            if (entity is PlayerEntity && stack.item.equals(ModItems.SUPER_INGOT) && selected) {
+            if (entity is PlayerEntity && stack.item.equals(MItems.SUPER_INGOT) && selected) {
                 if (entity.hungerManager.isNotFull) {
-                    if (coolDown > 0) { coolDown--; canUse = false } else canUse = true
-                    if (canUse) {entity.hungerManager.add(1, 1f); coolDown = 30}
+                    if (coolDown > 0) {
+                        coolDown--; canUse = false
+                    } else canUse = true
+                    if (canUse) {
+                        entity.hungerManager.add(1, 1f); coolDown = 30
+                    }
                 }
             }
         }

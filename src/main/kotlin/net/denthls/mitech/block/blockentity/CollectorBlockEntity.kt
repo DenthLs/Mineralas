@@ -1,6 +1,5 @@
 package net.denthls.mitech.block.blockentity
 
-import net.fabricmc.fabric.api.`object`.builder.v1.block.entity.FabricBlockEntityTypeBuilder
 import net.minecraft.block.BlockState
 import net.minecraft.block.InventoryProvider
 import net.minecraft.block.entity.BlockEntity
@@ -14,9 +13,12 @@ import net.minecraft.screen.ScreenHandler
 import net.minecraft.text.Text
 import net.minecraft.util.collection.DefaultedList
 import net.minecraft.util.math.BlockPos
+import net.minecraft.world.World
 import net.minecraft.world.WorldAccess
 
-open class CollectorBlockEntity(pos: BlockPos?, state: BlockState?, type: BlockEntityType<*>?) : BlockEntity(type, pos, state),
+
+class CollectorBlockEntity(pos: BlockPos?, state: BlockState?, type: BlockEntityType<*>?) :
+    BlockEntity(type, pos, state),
     NamedScreenHandlerFactory, InventoryProvider {
 
     val inventory: DefaultedList<ItemStack> = DefaultedList.ofSize(3, ItemStack.EMPTY)
@@ -33,8 +35,9 @@ open class CollectorBlockEntity(pos: BlockPos?, state: BlockState?, type: BlockE
         TODO("Not yet implemented")
     }
 
-    override fun create(blockPos: BlockPos?, blockState: BlockState?): BlockEntity {
-        TODO("Not yet implemented")
-    }
+    companion object {
+        fun tick(world: World?, pos: BlockPos?, state: BlockState?, entity: CollectorBlockEntity) {
 
+        }
+    }
 }

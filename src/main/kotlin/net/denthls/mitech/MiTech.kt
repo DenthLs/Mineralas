@@ -1,6 +1,8 @@
 package net.denthls.mitech
 
-import net.denthls.mitech.item.ModItems
+import net.denthls.mitech.block.MTBlocks
+import net.denthls.mitech.block.blockentity.MTBlockEntities
+import net.denthls.mitech.item.MItems
 import net.denthls.mitech.world.feature.ModConfiguredFeatures
 import net.denthls.mitech.world.gen.ModOreGeneration
 import net.fabricmc.api.ModInitializer
@@ -16,18 +18,19 @@ object MiTech : ModInitializer {
     val LOGGER = LoggerFactory.getLogger(MI)
 
     val itemGroup: ItemGroup = FabricItemGroupBuilder.build(
-        Identifier(MI,"items")
-    ) { ItemStack(ModItems.NEUTRON_INGOT) }
+        Identifier(MI, "items")
+    ) { ItemStack(MItems.NEUTRON_INGOT) }
     val blockGroup: ItemGroup = FabricItemGroupBuilder.build(
-        Identifier(MI,"blocks")
-    ) { ItemStack(ModItems.NEUTRON_BLOCK) }
+        Identifier(MI, "blocks")
+    ) { ItemStack(MTBlocks.NEUTRON_BLOCK) }
 
     override fun onInitialize() {
 
-    ModItems.init()
-    //BlockEntities.init()
-    ModConfiguredFeatures.init()
-    ModOreGeneration.generateOres()
+        MTBlocks.init()
+        MItems.init()
+        MTBlockEntities.init()
+        ModConfiguredFeatures.init()
+        ModOreGeneration.generateOres()
 
     }
 

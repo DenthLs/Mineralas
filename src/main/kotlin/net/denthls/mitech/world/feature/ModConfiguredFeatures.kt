@@ -1,6 +1,5 @@
 package net.denthls.mitech.world.feature
 
-import net.denthls.mitech.item.ModItems
 import net.minecraft.block.Blocks
 import net.minecraft.util.registry.RegistryEntry
 import net.minecraft.world.gen.feature.*
