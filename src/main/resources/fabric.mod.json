@@ -3,13 +3,13 @@
   "id": "mineralas",
   "version": "1.0.0",
   "name": "Mineralas",
-  "description": "Custom Ore Generation Mod",
+  "description": "Mod with configurable ore generation",
   "authors": [
     "DenthLs"
   ],
   "contact": {
     "homepage": "Empty for a while",
-    "sources": "Empty for a while"
+    "sources": "https://github.com/DenthLs/Mineralas"
   },
   "license": "MIT",
   "icon": "assets/mineralas/icon.png",
