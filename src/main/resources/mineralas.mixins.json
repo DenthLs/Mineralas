@@ -5,7 +5,8 @@
   "mixins": [
   ],
   "client": [
-    "MnMixin"
+  ],
+  "server": [
   ],
   "injectors": {
     "defaultRequire": 1

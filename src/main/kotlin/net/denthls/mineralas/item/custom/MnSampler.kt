@@ -16,7 +16,7 @@ import net.minecraft.util.Formatting
 import net.minecraft.world.World
 
 
-open class MnSampler(settings: Settings) : Item(settings) {
+open class DowsingRod(settings: Settings) : Item(settings) {
     override fun useOnBlock(context: ItemUsageContext): ActionResult {
         if (context.world.isClient()) {
             val positionClicked = context.blockPos
@@ -31,7 +31,7 @@ open class MnSampler(settings: Settings) : Item(settings) {
                 }
             }
             if (!foundBlock) {
-                player!!.sendMessage(TranslatableText("item.mineralas.sampler.no_valuables"), false)
+                player!!.sendMessage(TranslatableText("item.mineralas.dowsing_rod.no_valuables"), false)
             }
         }
 
@@ -49,10 +49,10 @@ open class MnSampler(settings: Settings) : Item(settings) {
         context: TooltipContext
     ) {
         if (!Screen.hasShiftDown()) {
-            tooltip.add(TranslatableText("item.mineralas.sampler.tooltip_0"))
+            tooltip.add(TranslatableText("item.mineralas.dowsing_rod.tooltip_0"))
         } else {
-            tooltip.add(TranslatableText("item.mineralas.sampler.tooltip_1").formatted(Formatting.YELLOW))
-            tooltip.add(TranslatableText("item.mineralas.sampler.tooltip_2").formatted(Formatting.YELLOW))
+            tooltip.add(TranslatableText("item.mineralas.dowsing_rod.tooltip_1").formatted(Formatting.YELLOW))
+            tooltip.add(TranslatableText("item.mineralas.dowsing_rod.tooltip_2").formatted(Formatting.YELLOW))
         }
         super.appendTooltip(stack, world, tooltip, context)
     }

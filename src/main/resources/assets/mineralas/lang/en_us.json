@@ -2,11 +2,13 @@
   "itemGroup.mineralas.items": "Mineralas Items",
   "itemGroup.mineralas.samples": "Mineralas Samples",
   "itemGroup.mineralas.ores": "Mineralas Ores",
+
   "block.mineralas.hematite_ore_sample": "Hematite Ore Sample",
   "block.mineralas.hematite_ore": "Hematite Ore",
-  "item.mineralas.sampler": "Sampler",
-  "item.mineralas.sampler.no_valuables": "No Valuables",
-  "item.mineralas.sampler.tooltip_0": "Please Shift for more info",
-  "item.mineralas.sampler.tooltip_1": "Click on the block to use",
-  "item.mineralas.sampler.tooltip_2": "Shows information about ores 64 blocks down"
+
+  "item.mineralas.dowsing_rod": "Sampler",
+  "item.mineralas.dowsing_rod.no_valuables": "No Valuables",
+  "item.mineralas.dowsing_rod.tooltip_0": "Please Shift for more info",
+  "item.mineralas.dowsing_rod.tooltip_1": "Click on the block to use",
+  "item.mineralas.dowsing_rod.tooltip_2": "Shows information about ores 64 blocks down"
 }

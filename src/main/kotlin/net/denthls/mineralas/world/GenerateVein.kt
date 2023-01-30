@@ -18,13 +18,13 @@ import kotlin.random.Random
 object GenerateVein {
     fun generateOre(
         originPos: BlockPos, world: StructureWorldAccess, size: Int, targets: List<OreFeatureConfig.Target>,
-        random: java.util.Random, height: Int
+        random: java.util.Random, height: String
     ) {
         val originX = originPos.x
         val originZ = originPos.z
         val newY = when (height) {
-            0 -> Random.nextInt(15, 45)
-            1 -> Random.nextInt(-45, -15)
+            "stone" -> Random.nextInt(15, 45)
+            "deepslate" -> Random.nextInt(-45, -15)
             else -> Random.nextInt(15, 45)
         }
         val blockPos = BlockPos(originX, newY, originZ)

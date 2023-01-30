@@ -16,24 +16,18 @@ import net.minecraft.util.registry.Registry
 
 object MnSamples {
 
-    private val samplesGroup: ItemGroup = FabricItemGroupBuilder.build(
-        Identifier(Mineralas.MI, "samples")
-    ) { ItemStack(HEMATITE_ORE_SAMPLE) }
-
-    val HEMATITE_ORE_SAMPLE = register(
-        "hematite_ore_sample", SampleBlock(
-            FabricBlockSettings.of(Material.STONE).breakInstantly().sounds(BlockSoundGroup.STONE)
-        )
+    private val sampleBlock = SampleBlock(
+        FabricBlockSettings.of(Material.STONE).breakInstantly().sounds(BlockSoundGroup.STONE)
     )
 
-    private fun register(name: String, block: Block): Block {
+    val HEMATITE_ORE_SAMPLE = register("hematite_ore_sample")
+
+    private fun register(name: String): Block {
         Registry.register(
             Registry.ITEM, Identifier(Mineralas.MI, name),
-            BlockItem(block, FabricItemSettings().group(samplesGroup))
+            BlockItem(sampleBlock, FabricItemSettings().group(Mineralas.samplesGroup))
         )
-        return Registry.register(Registry.BLOCK, Identifier(Mineralas.MI, name), block)
+        return Registry.register(Registry.BLOCK, Identifier(Mineralas.MI, name), sampleBlock)
     }
-
-    fun registerSamples() {}
 
 }

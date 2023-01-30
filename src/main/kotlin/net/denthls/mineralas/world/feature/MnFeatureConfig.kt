@@ -11,7 +11,7 @@ class MnFeatureConfig(
     val blockId: Identifier,
     val oreBlockId: Identifier,
     val size: Int,
-    val toReplace: Int
+    val height: String
 ) : FeatureConfig {
     companion object {
         val CODEC: Codec<MnFeatureConfig> =
@@ -20,10 +20,10 @@ class MnFeatureConfig(
                     Identifier.CODEC.fieldOf("blockId").forGetter(MnFeatureConfig::blockId),
                     Identifier.CODEC.fieldOf("oreBlockId").forGetter(MnFeatureConfig::oreBlockId),
                     Codecs.POSITIVE_INT.fieldOf("size").forGetter(MnFeatureConfig::size),
-                    Codecs.NONNEGATIVE_INT.fieldOf("toReplace").forGetter(MnFeatureConfig::toReplace)
+                    Codec.STRING.fieldOf("height").forGetter(MnFeatureConfig::height)
                 ).apply(instance) { blockId: Identifier, oreBlockId: Identifier,
-                                    size: Int, toReplace: Int ->
-                    MnFeatureConfig(blockId, oreBlockId, size, toReplace)
+                                    size: Int, height: String ->
+                    MnFeatureConfig(blockId, oreBlockId, size, height)
                 }
             }
     }

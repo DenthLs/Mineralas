@@ -32,6 +32,4 @@ object MnTags {
         return TagKey.of(Registry.BLOCK_KEY, Identifier("c", id))
     }
 
-    fun registerTags() {}
-
 }

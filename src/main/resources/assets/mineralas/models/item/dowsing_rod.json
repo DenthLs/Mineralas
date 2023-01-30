@@ -1,7 +1,7 @@
 {
   "parent": "item/generated",
   "textures": {
-    "layer0": "mineralas:item/sampler"
+    "layer0": "mineralas:item/dowsing_rod"
   }
 
 }

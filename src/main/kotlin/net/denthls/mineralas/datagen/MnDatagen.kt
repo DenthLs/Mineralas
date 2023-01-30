@@ -7,10 +7,10 @@ import net.fabricmc.fabric.api.datagen.v1.FabricDataGenerator
 
 object MnDatagen : DataGeneratorEntrypoint {
     override fun onInitializeDataGenerator(fabricDataGenerator: FabricDataGenerator) {
-        fabricDataGenerator.addProvider { fabricDataGenerator: FabricDataGenerator ->
+        fabricDataGenerator.addProvider {
             MnBlockTagGen(fabricDataGenerator)
         }
-        fabricDataGenerator.addProvider { fabricDataGenerator: FabricDataGenerator ->
+        fabricDataGenerator.addProvider {
             MnItemTagGen(fabricDataGenerator)
         }
     }

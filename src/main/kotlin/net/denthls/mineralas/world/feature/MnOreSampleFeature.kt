@@ -30,7 +30,7 @@ open class MnOreSampleFeature(configCodec: Codec<MnFeatureConfig>) : Feature<MnF
         val oreBlockId: Identifier = config.oreBlockId
         val size: Int = config.size
         val random: java.util.Random = java.util.Random(8)
-        val toReplace: Int = config.toReplace
+        val height: String = config.height
 
         val blockState: BlockState = Registry.BLOCK.get(blockId).defaultState
         var blockPos = surface(origin)
@@ -38,12 +38,12 @@ open class MnOreSampleFeature(configCodec: Codec<MnFeatureConfig>) : Feature<MnF
         var testPos: BlockPos
         var count = 0
         val maxCountSamples = 7
-        val target = createTarget(toReplace, oreBlockId)
+        val target = createTarget(height, oreBlockId)
 
         for (y in 50..world.topY) {
             currentBlockState = world.getBlockState(blockPos)
             blockPos = blockPos.up()
-            GenerateVein.generateOre(blockPos, world, size, target, random, toReplace)
+            GenerateVein.generateOre(blockPos, world, size, target, random, height)
             if (surfaceContains(currentBlockState)) {
                 if (isAirUpToThree(world, blockPos)) {
                     testPos = blockPos
@@ -170,11 +170,11 @@ open class MnOreSampleFeature(configCodec: Codec<MnFeatureConfig>) : Feature<MnF
         return BlockPos(x, 50, z)
     }
 
-    private fun createTarget(toReplace: Int, blockId: Identifier): List<OreFeatureConfig.Target> {
+    private fun createTarget(height: String, blockId: Identifier): List<OreFeatureConfig.Target> {
         val blockState: BlockState = Registry.BLOCK.get(blockId).defaultState
-        val ruleTest: RuleTest = when (toReplace) {
-            0 -> OreConfiguredFeatures.STONE_ORE_REPLACEABLES
-            1 -> OreConfiguredFeatures.DEEPSLATE_ORE_REPLACEABLES
+        val ruleTest: RuleTest = when (height) {
+            "stone" -> OreConfiguredFeatures.STONE_ORE_REPLACEABLES
+            "deepslate" -> OreConfiguredFeatures.DEEPSLATE_ORE_REPLACEABLES
             else -> {
                 OreConfiguredFeatures.STONE_ORE_REPLACEABLES
             }
