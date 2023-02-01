@@ -11,20 +11,29 @@ object ConfigManager {
     private val json = Json { encodeDefaults = true; prettyPrint = true; ignoreUnknownKeys = true }
     private val configDir: File = Paths.get("", "config", Mineralas.MI).toFile()
     private val configFile = File(configDir, "config.json")
+    private val removeConfigFile = File(configDir, "remove_config.json")
 
     init {
+        if (!configDir.exists()) configDir.mkdirs()
         if (!configFile.exists()) {
-            if (!configDir.exists()) configDir.mkdirs()
             configFile.apply {
                 createNewFile()
                 writeText(json.encodeToString(Config()))
             }
-        } else configFile.writeText(json.encodeToString(read()))
+        } else configFile.writeText(json.encodeToString(readConfig()))
+        if (!removeConfigFile.exists()) {
+            removeConfigFile.apply {
+                createNewFile()
+                writeText(json.encodeToString(RemoveConfig()))
+            }
+        } else removeConfigFile.writeText(json.encodeToString(readRemoveConfig()))
     }
 
-    private fun read(): Config {
+    private fun readConfig(): Config {
         return json.decodeFromString(configFile.readText())
     }
-
+    private fun readRemoveConfig(): RemoveConfig {
+        return json.decodeFromString(removeConfigFile.readText())
+    }
 }
 

@@ -1,26 +1,23 @@
 package net.denthls.mineralas.world.feature.removeWorldGen
 
-import net.denthls.mineralas.Mineralas.log
-import net.fabricmc.fabric.api.biome.v1.BiomeModification
-import net.fabricmc.fabric.api.biome.v1.BiomeModificationContext
-import net.fabricmc.fabric.api.biome.v1.BiomeModifications
-import net.fabricmc.fabric.api.biome.v1.BiomeSelectors
-import net.fabricmc.fabric.api.biome.v1.ModificationPhase
-import net.fabricmc.fabric.impl.biome.modification.BiomeModificationContextImpl
-import net.fabricmc.fabric.impl.biome.modification.BiomeModificationImpl
-import net.fabricmc.fabric.impl.biome.modification.BiomeSelectionContextImpl
-import net.minecraft.util.Identifier
-import net.minecraft.util.registry.RegistryEntryList
-import net.minecraft.world.biome.Biome
-import net.minecraft.world.biome.GenerationSettings
-import net.minecraft.world.gen.feature.PlacedFeature
-
-
 object AllFeatures {
     /*fun init(){
-        val features = GenerationSettings.INSTANCE.features
-        for (element in features){
-            log(element.toString())
+        if (RemoveConfig().getFeatures.logEnabled){
+            for (element in RemoveConfig().getFeatures.biomes){
+                val biomes = BuiltinRegistries.BIOME.get(RegistryKey.of(Registry.BIOME_KEY, Identifier(element)))
+                val features = biomes?.generationSettings?.features
+                if (features != null) {
+                    for (g in features){
+                        log(g.toString())
+                        for (i in g) {
+                            if (i is OrePlacedFeatures){
+                                log(i.toString())
+                            }
+                        }
+                    }
+                }
+            }
         }
     }*/
+
 }
