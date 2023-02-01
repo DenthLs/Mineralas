@@ -1,5 +1,6 @@
 package net.denthls.mineralas.datagen
 
+import net.denthls.mineralas.datagen.models.MnModelGen
 import net.denthls.mineralas.datagen.tags.MnBlockTagGen
 import net.denthls.mineralas.datagen.tags.MnItemTagGen
 import net.fabricmc.fabric.api.datagen.v1.DataGeneratorEntrypoint
@@ -12,6 +13,9 @@ object MnDatagen : DataGeneratorEntrypoint {
         }
         fabricDataGenerator.addProvider {
             MnItemTagGen(fabricDataGenerator)
+        }
+        fabricDataGenerator.addProvider{
+            MnModelGen(fabricDataGenerator)
         }
     }
 }

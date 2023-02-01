@@ -19,10 +19,33 @@ import net.minecraft.world.gen.placementmodifier.RarityFilterPlacementModifier
 
 object MnConfiguredFeatures {
 
-    private val hematiteDeposit = listOf("hematite_feature", "hematite_ore_sample", "mineralas:hematite_ore", "stone")
-    private val deepslateHematiteDeposit = listOf("deepslate_hematite_feature", "hematite_ore_sample", "mineralas:deepslate_hematite_ore", "deepslate")
-    private val deposits = listOf(hematiteDeposit, deepslateHematiteDeposit)
-    private val depositsProps = listOf(Config().hematiteDeposit, Config().deepslateHematiteDeposit)
+    private val hematiteDeposit = l("hematite", "stone")
+    private val limoniteDeposit = l("limonite", "deepslate")
+    private val malachiteDeposit = l("malachite","stone")
+    private val azuriteDeposit = l("azurite","deepslate")
+    private val nativeGoldDeposit = l("native_gold","deepslate")
+    private val ultrabasiteDeposit = l("ultrabasite","deepslate")
+    private val cinnabarDeposit = l("cinnabar","deepslate")
+    private val quartzDeposit = l("quartz","stone")
+    private val antimoniteDeposit = l("antimonite","stone")
+    private val fossilCoalDeposit = l("fossil_coal","stone")
+    private val argentiteDeposit = l("argentite","deepslate")
+    private val nevyanskiteDeposit = l("nevyanskite","deepslate")
+    private val cassiteriteDeposit = l("cassiterite","stone")
+    private val pentlanditeDeposit = l("pentlandite","stone")
+    private val haliteDeposit = l("halite","stone")
+    private val wolframiteDeposit = l("wolframite","deepslate")
+    private val uraniniteDeposit = l("uraninite","deepslate")
+    private val bauxiteDeposit = l("bauxite","stone")
+    private val galenaDeposit = l("galena","stone")
+    private val mozaniteDeposit = l("mozanite","deepslate")
+    private val deposits = listOf(hematiteDeposit, limoniteDeposit, malachiteDeposit, azuriteDeposit, nativeGoldDeposit, ultrabasiteDeposit, cinnabarDeposit, quartzDeposit,
+        antimoniteDeposit, fossilCoalDeposit, argentiteDeposit, nevyanskiteDeposit, cassiteriteDeposit, pentlanditeDeposit, haliteDeposit, wolframiteDeposit,
+        uraniniteDeposit, bauxiteDeposit, galenaDeposit, mozaniteDeposit)
+    private val depositsProps = listOf(Config().hematiteDeposit, Config().limoniteDeposit, Config().malachiteDeposit, Config().azuriteDeposit, Config().nativeGoldDeposit,
+        Config().ultrabasiteDeposit, Config().cinnabarDeposit, Config().quartzDeposit, Config().antimoniteDeposit, Config().fossilCoalDeposit, Config().argentiteDeposit,
+        Config().nevyanskiteDeposit, Config().cassiteriteDeposit, Config().pentlanditeDeposit, Config().haliteDeposit, Config().wolframiteDeposit,
+        Config().uraniniteDeposit, Config().bauxiteDeposit, Config().galenaDeposit, Config().mozaniteDeposit)
 
     fun generateOres() {
         for (i in depositsProps.indices){
@@ -32,6 +55,9 @@ object MnConfiguredFeatures {
         }
     }
 
+    private fun l(name: String, height: String): List<String> {
+        return listOf(name + "_ore", name + "_sample", name, height)
+    }
 
     private fun register(list: List<String>, rarity: Int, size: Int){
         registerFeature(
@@ -53,7 +79,7 @@ object MnConfiguredFeatures {
             ConfiguredFeature<MnFeatureConfig, MnOreSampleFeature>(
                 feature as MnOreSampleFeature,
                 MnFeatureConfig(
-                    Identifier(Mineralas.MI, sampleId), Identifier(oreBlockId),
+                    Identifier(Mineralas.MI, sampleId), Identifier(Mineralas.MI, oreBlockId),
                     size, height
                 )
             )

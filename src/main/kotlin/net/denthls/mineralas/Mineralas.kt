@@ -23,10 +23,10 @@ object Mineralas : ModInitializer {
     }
     val oresGroup: ItemGroup = FabricItemGroupBuilder.build(
         Identifier(MI, "ores")
-    ) { ItemStack(MnOres.HEMATITE_ORE) }
+    ) { ItemStack(MnOres.HEMATITE) }
     val samplesGroup: ItemGroup = FabricItemGroupBuilder.build(
         Identifier(MI, "samples")
-    ) { ItemStack(MnSamples.HEMATITE_ORE_SAMPLE) }
+    ) { ItemStack(MnSamples.HEMATITE_SAMPLE) }
 
     override fun onInitialize() {
         log("Mineralas Initialized")

@@ -20,11 +20,11 @@ class MnBlockTagGen(dataGenerator: FabricDataGenerator) :
                 .add(element)
         }
         getOrCreateTagBuilder(MnTags.HEMATITE_ORES)
-            .add(MnOres.HEMATITE_ORE)
+            .add(MnOres.HEMATITE)
 //            .add(MnOres.DEEPSLATE_HEMATITE_ORE)
     }
 
-    private val ores = listOf(MnOres.HEMATITE_ORE)
-    private val samples = listOf(MnSamples.HEMATITE_ORE_SAMPLE)
+    private val ores = listOf(MnOres.HEMATITE)
+    private val samples = listOf(MnSamples.HEMATITE_SAMPLE)
 
 }
