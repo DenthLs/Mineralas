@@ -8,16 +8,16 @@ import net.minecraft.block.Block
 import net.minecraft.util.registry.Registry
 
 
-class MnBlockTagGen(dataGenerator: FabricDataGenerator) :
+class BlockTagGen(dataGenerator: FabricDataGenerator) :
     FabricTagProvider<Block>(dataGenerator, Registry.BLOCK, "Mineralas Block Tags") {
     override fun generateTags() {
         Mineralas.ores.forEach { element: Block ->
-            getOrCreateTagBuilder(MnTags.ORES).add(element)
-            getOrCreateTagBuilder(MnTags.MINEABLE).add(element)
+            getOrCreateTagBuilder(Tags.ORES).add(element)
+            getOrCreateTagBuilder(Tags.MINEABLE).add(element)
         }
         Mineralas.samples.forEach { element: SampleBlock ->
-            getOrCreateTagBuilder(MnTags.SAMPLES).add(element)
-            getOrCreateTagBuilder(MnTags.MINEABLE).add(element)
+            getOrCreateTagBuilder(Tags.SAMPLES).add(element)
+            getOrCreateTagBuilder(Tags.MINEABLE).add(element)
         }
 
     }

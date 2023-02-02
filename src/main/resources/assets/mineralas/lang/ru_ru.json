@@ -2,7 +2,7 @@
   "itemGroup.mineralas.items": "Mineralas Предметы",
   "itemGroup.mineralas.samples": "Mineralas Образцы",
   "itemGroup.mineralas.ores": "Mineralas Руды",
-
+  "block.mineralas.stone_sample": "Горная порода",
   "block.mineralas.hematite_sample": "Образец гематита",
   "block.mineralas.hematite": "Гематита",
   "block.mineralas.limonite_sample": "Образец лимонита",

@@ -1,4 +1,4 @@
-package net.denthls.mineralas.world.feature
+package net.denthls.mineralas.world.feature.featureConfigs
 
 import com.mojang.serialization.Codec
 import com.mojang.serialization.codecs.RecordCodecBuilder

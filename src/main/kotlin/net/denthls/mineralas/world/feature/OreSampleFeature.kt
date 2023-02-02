@@ -1,7 +1,9 @@
 package net.denthls.mineralas.world.feature
 
 import com.mojang.serialization.Codec
-import net.denthls.mineralas.world.GenerateVein
+import net.denthls.mineralas.Mineralas.logger
+import net.denthls.mineralas.world.GenerateDeposit
+import net.denthls.mineralas.world.feature.featureConfigs.MnFeatureConfig
 import net.minecraft.block.Block
 import net.minecraft.block.BlockState
 import net.minecraft.block.Blocks
@@ -18,7 +20,7 @@ import net.minecraft.world.gen.feature.util.FeatureContext
 import kotlin.random.Random
 
 
-open class MnOreSampleFeature(configCodec: Codec<MnFeatureConfig>) : Feature<MnFeatureConfig>(configCodec) {
+open class OreSampleFeature(configCodec: Codec<MnFeatureConfig>) : Feature<MnFeatureConfig>(configCodec) {
     override fun generate(context: FeatureContext<MnFeatureConfig>): Boolean {
 
         val world: StructureWorldAccess = context.world
@@ -34,17 +36,18 @@ open class MnOreSampleFeature(configCodec: Codec<MnFeatureConfig>) : Feature<MnF
 
         (50..world.topY).forEach { _ ->
             blockPos = blockPos.up()
-            GenerateVein.generateOre(
-                blockPos,
-                world,
-                config.size,
-                createTarget(height, config.oreBlockId),
-                java.util.Random(8),
-                height
-            )
             if (surfaceContains(world.getBlockState(blockPos))) {
                 if (isAirUpToThree(world, blockPos)) {
                     testPos = blockPos
+                    GenerateDeposit.generateOre(
+                        testPos,
+                        world,
+                        config.size,
+                        createTarget(height, config.oreBlockId),
+                        height
+                    )
+                    logger.info("Generated")
+                    world.setBlockState(testPos.up(), blockState, 3)
                     testPos = testPos.add(4, 0, 4)
                     (1..9).forEach { _ ->
                         (1..9).forEach { _ ->

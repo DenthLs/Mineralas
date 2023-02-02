@@ -2,12 +2,12 @@ package net.denthls.mineralas
 
 import com.mojang.logging.LogUtils
 import net.denthls.mineralas.config.ConfigManager
-import net.denthls.mineralas.datagen.tags.MnTags
+import net.denthls.mineralas.datagen.tags.Tags
 import net.denthls.mineralas.registry.ItemsRegistry
 import net.denthls.mineralas.registry.ItemsRegistry.DOWSING_ROD
 import net.denthls.mineralas.registry.OresRegistry
 import net.denthls.mineralas.registry.SamplesRegistry
-import net.denthls.mineralas.world.feature.MnConfiguredFeatures
+import net.denthls.mineralas.world.feature.ConfiguredFeatures
 import net.denthls.mineralas.world.feature.removeWorldGen.RemoveFeature
 import net.fabricmc.api.ModInitializer
 import net.fabricmc.fabric.api.client.itemgroup.FabricItemGroupBuilder
@@ -41,20 +41,22 @@ object Mineralas : ModInitializer {
         SamplesRegistry.CINNABAR_SAMPLE, SamplesRegistry.QUARTZ_SAMPLE, SamplesRegistry.ANTIMONITE_SAMPLE,
         SamplesRegistry.FOSSIL_COAL_SAMPLE, SamplesRegistry.ARGENTITE_SAMPLE, SamplesRegistry.NEVYANSKITE_SAMPLE,
         SamplesRegistry.CASSITERITE_SAMPLE, SamplesRegistry.PENTLANDITE_SAMPLE, SamplesRegistry.HALITE_SAMPLE,
-        SamplesRegistry.URANINITE_SAMPLE, SamplesRegistry.BAUXITE_SAMPLE,
-        SamplesRegistry.GALENA_SAMPLE, SamplesRegistry.MOZANITE_SAMPLE
+        SamplesRegistry.URANINITE_SAMPLE, SamplesRegistry.BAUXITE_SAMPLE, SamplesRegistry.GALENA_SAMPLE,
+        SamplesRegistry.MOZANITE_SAMPLE
     )
 
     override fun onInitialize() {
         logger.info("Mineralas Initialized")
         ItemsRegistry.init()
         OresRegistry
-        MnConfiguredFeatures.generateOres()
-        MnConfiguredFeatures.removeVein("remove_veins")
+        ConfiguredFeatures.generateOres()
+        ConfiguredFeatures.stoneSample("rock")
+        ConfiguredFeatures.removeVein("remove_veins")
         RemoveFeature
-        MnTags
+        Tags
         ConfigManager
         SamplesRegistry
+
 //        AllFeatures.init()
     }
 }

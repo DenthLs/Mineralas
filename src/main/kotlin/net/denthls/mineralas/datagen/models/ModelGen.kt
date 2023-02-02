@@ -8,16 +8,20 @@ import net.minecraft.util.Identifier
 import net.minecraft.util.registry.Registry
 import java.util.*
 
-class MnModelGen(dataGenerator: FabricDataGenerator) : FabricModelProvider(dataGenerator) {
+class ModelGen(dataGenerator: FabricDataGenerator) : FabricModelProvider(dataGenerator) {
     private val ore: TextureKey = TextureKey.of("ore")
     private val _ore: TextureKey = TextureKey.of("_ore")
     private val stone: TextureKey = TextureKey.of("stone")
     override fun generateBlockStateModels(blockStateModelGenerator: BlockStateModelGenerator) {
         Mineralas.ores.forEach { element ->
             blockStateModelGenerator.registerSimpleCubeAll(element)
-            blockStateModelGenerator.registerParentedItemModel(element, Identifier(Mineralas.MI, "block/${
-                Registry.BLOCK.getId(element).path
-            }"))
+            blockStateModelGenerator.registerParentedItemModel(
+                element, Identifier(
+                    Mineralas.MI, "block/${
+                        Registry.BLOCK.getId(element).path
+                    }"
+                )
+            )
         }
         Mineralas.samples.forEach { element ->
             registerSample(blockStateModelGenerator, Registry.BLOCK.getId(element).path)

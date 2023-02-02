@@ -2,6 +2,8 @@ package net.denthls.mineralas.world.feature
 
 import net.denthls.mineralas.Mineralas
 import net.denthls.mineralas.config.Config
+import net.denthls.mineralas.world.feature.featureConfigs.MnFeatureConfig
+import net.denthls.mineralas.world.feature.featureConfigs.SampleFeatureConfig
 import net.denthls.mineralas.world.feature.removeWorldGen.RemoveVeinFeature
 import net.fabricmc.fabric.api.biome.v1.BiomeModifications
 import net.fabricmc.fabric.api.biome.v1.BiomeSelectors
@@ -17,30 +19,28 @@ import net.minecraft.world.gen.placementmodifier.CountPlacementModifier
 import net.minecraft.world.gen.placementmodifier.PlacementModifier
 import net.minecraft.world.gen.placementmodifier.RarityFilterPlacementModifier
 
-object MnConfiguredFeatures {
+object ConfiguredFeatures {
 
-    // TODO ДАЙ МЕТОДАМ НОРМАЛЬНЫЕ ИМЕНА!!!!!
-
-    private val hematiteDeposit = l("hematite", "stone")
-    private val limoniteDeposit = l("limonite", "deepslate")
-    private val malachiteDeposit = l("malachite", "stone")
-    private val azuriteDeposit = l("azurite", "deepslate")
-    private val nativeGoldDeposit = l("native_gold", "deepslate")
-    private val ultrabasiteDeposit = l("ultrabasite", "deepslate")
-    private val cinnabarDeposit = l("cinnabar", "deepslate")
-    private val quartzDeposit = l("quartz", "stone")
-    private val antimoniteDeposit = l("antimonite", "stone")
-    private val fossilCoalDeposit = l("fossil_coal", "stone")
-    private val argentiteDeposit = l("argentite", "deepslate")
-    private val nevyanskiteDeposit = l("nevyanskite", "deepslate")
-    private val cassiteriteDeposit = l("cassiterite", "stone")
-    private val pentlanditeDeposit = l("pentlandite", "stone")
-    private val haliteDeposit = l("halite", "stone")
-    private val wolframiteDeposit = l("wolframite", "deepslate")
-    private val uraniniteDeposit = l("uraninite", "deepslate")
-    private val bauxiteDeposit = l("bauxite", "stone")
-    private val galenaDeposit = l("galena", "stone")
-    private val mozaniteDeposit = l("mozanite", "deepslate")
+    private val hematiteDeposit = featureList("hematite", "stone")
+    private val limoniteDeposit = featureList("limonite", "deepslate")
+    private val malachiteDeposit = featureList("malachite", "stone")
+    private val azuriteDeposit = featureList("azurite", "deepslate")
+    private val nativeGoldDeposit = featureList("native_gold", "deepslate")
+    private val ultrabasiteDeposit = featureList("ultrabasite", "deepslate")
+    private val cinnabarDeposit = featureList("cinnabar", "deepslate")
+    private val quartzDeposit = featureList("quartz", "stone")
+    private val antimoniteDeposit = featureList("antimonite", "stone")
+    private val fossilCoalDeposit = featureList("fossil_coal", "stone")
+    private val argentiteDeposit = featureList("argentite", "deepslate")
+    private val nevyanskiteDeposit = featureList("nevyanskite", "deepslate")
+    private val cassiteriteDeposit = featureList("cassiterite", "stone")
+    private val pentlanditeDeposit = featureList("pentlandite", "stone")
+    private val haliteDeposit = featureList("halite", "stone")
+    private val wolframiteDeposit = featureList("wolframite", "deepslate")
+    private val uraniniteDeposit = featureList("uraninite", "deepslate")
+    private val bauxiteDeposit = featureList("bauxite", "stone")
+    private val galenaDeposit = featureList("galena", "stone")
+    private val mozaniteDeposit = featureList("mozanite", "deepslate")
 
     private val deposits = listOf(
         hematiteDeposit,
@@ -95,7 +95,8 @@ object MnConfiguredFeatures {
         }
     }
 
-    private fun l(name: String, height: String): List<String> = listOf(name + "_ore", name + "_sample", name, height)
+    private fun featureList(name: String, height: String): List<String> =
+        listOf(name + "_ore", name + "_sample", name, height)
 
     private fun register(list: List<String>, rarity: Int, size: Int) {
         registerFeature(list[0], list[1], list[2], list[3], rarity, size)
@@ -110,10 +111,10 @@ object MnConfiguredFeatures {
         size: Int
     ) {
         val id = Identifier(Mineralas.MI, featureId)
-        val feature: Feature<MnFeatureConfig> = MnOreSampleFeature(MnFeatureConfig.CODEC)
-        val configuredFeature: ConfiguredFeature<MnFeatureConfig, MnOreSampleFeature> =
-            ConfiguredFeature<MnFeatureConfig, MnOreSampleFeature>(
-                feature as MnOreSampleFeature,
+        val feature: Feature<MnFeatureConfig> = OreSampleFeature(MnFeatureConfig.CODEC)
+        val configuredFeature: ConfiguredFeature<MnFeatureConfig, OreSampleFeature> =
+            ConfiguredFeature<MnFeatureConfig, OreSampleFeature>(
+                feature as OreSampleFeature,
                 MnFeatureConfig(Identifier(Mineralas.MI, sampleId), Identifier(Mineralas.MI, oreBlockId), size, height)
             )
 
@@ -165,6 +166,35 @@ object MnConfiguredFeatures {
             RegistryKey.of(Registry.PLACED_FEATURE_KEY, id)
         )
 
+    }
+
+    fun stoneSample(
+        featurePath: String
+    ) {
+        val id = Identifier(Mineralas.MI, featurePath)
+        val feature: Feature<SampleFeatureConfig> = StoneSampleFeature(SampleFeatureConfig.CODEC)
+        val configuredFeature: ConfiguredFeature<SampleFeatureConfig, StoneSampleFeature> =
+            ConfiguredFeature<SampleFeatureConfig, StoneSampleFeature>(
+                feature as StoneSampleFeature,
+                SampleFeatureConfig(
+                    Identifier("mineralas:stone_sample"), 1
+                )
+            )
+
+        val placedFeature = PlacedFeature(
+            RegistryEntry.of(configuredFeature),
+            listOf<PlacementModifier>(CountPlacementModifier.of(1))
+        )
+
+        Registry.register(Registry.FEATURE, id, feature)
+        Registry.register(BuiltinRegistries.CONFIGURED_FEATURE, id, configuredFeature)
+        Registry.register(BuiltinRegistries.PLACED_FEATURE, id, placedFeature)
+
+        BiomeModifications.addFeature(
+            BiomeSelectors.foundInOverworld(),
+            GenerationStep.Feature.VEGETAL_DECORATION,
+            RegistryKey.of(Registry.PLACED_FEATURE_KEY, id)
+        )
     }
 
 }

@@ -1,6 +1,6 @@
 package net.denthls.mineralas.item
 
-import net.denthls.mineralas.datagen.tags.MnTags
+import net.denthls.mineralas.datagen.tags.Tags
 import net.minecraft.block.Block
 import net.minecraft.client.gui.screen.Screen
 import net.minecraft.client.item.TooltipContext
@@ -20,13 +20,12 @@ import java.util.*
 
 open class DowsingRod(settings: Settings, private val height: Int) : Item(settings) {
     override fun useOnBlock(context: ItemUsageContext): ActionResult {
-        if (context.world.isClient()) {
-            val stack = context.stack
+        val stack = context.stack
+        val player = context.player
+        val world = context.world
+        if (player is ServerPlayerEntity && !player.isCreative) stack.damage(1, Random(0), player)
+        if (world.isClient()) {
             val positionClicked = context.blockPos
-            val player = context.player
-            if (player is ServerPlayerEntity) {
-                stack.damage(1, Random(0), player)
-            }
             var foundBlock = false
             (0..positionClicked.y + height).forEach { y ->
                 context.world.getBlockState(positionClicked.down(y)).block.apply {
@@ -41,7 +40,7 @@ open class DowsingRod(settings: Settings, private val height: Int) : Item(settin
         }
 
 
-        context.stack.damage(1, context.player) { player ->
+        context.stack.damage(1, context.player) {
             player?.sendToolBreakStatus(player.activeHand)
         }
         return super.useOnBlock(context)
@@ -65,7 +64,7 @@ open class DowsingRod(settings: Settings, private val height: Int) : Item(settin
     }
 
     private fun isValuableBlock(block: Block): Boolean {
-        if (block.defaultState.isIn(MnTags.ORES)) return true
+        if (block.defaultState.isIn(Tags.ORES)) return true
         return false
     }
 }

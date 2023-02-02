@@ -7,7 +7,7 @@ import net.minecraft.util.Identifier
 import net.minecraft.util.registry.Registry
 
 
-object MnTags {
+object Tags {
 
     val ORES = registerCommonBlock("ores")
     val ORES_ITEM = registerCommonItem("ores")

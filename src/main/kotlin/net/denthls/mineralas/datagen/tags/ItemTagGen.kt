@@ -7,12 +7,12 @@ import net.minecraft.item.Item
 import net.minecraft.util.registry.Registry
 
 
-class MnItemTagGen(dataGenerator: FabricDataGenerator) :
+class ItemTagGen(dataGenerator: FabricDataGenerator) :
     FabricTagProvider<Item>(dataGenerator, Registry.ITEM, "Mineralas Block Tags") {
 
     override fun generateTags() {
         Mineralas.ores.forEach { element ->
-            getOrCreateTagBuilder(MnTags.ORES_ITEM).add(element.asItem())
+            getOrCreateTagBuilder(Tags.ORES_ITEM).add(element.asItem())
         }
     }
 }
