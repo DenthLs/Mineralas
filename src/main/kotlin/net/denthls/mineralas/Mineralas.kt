@@ -28,6 +28,19 @@ object Mineralas : ModInitializer {
         Identifier(MI, "samples")
     ) { ItemStack(MnSamples.HEMATITE_SAMPLE) }
 
+    val ores = listOf(MnOres.HEMATITE, MnOres.LIMONITE, MnOres.MALACHITE, MnOres.AZURITE,
+        MnOres.NATIVE_GOLD, MnOres.ULTRABASITE, MnOres.CINNABAR, MnOres.QUARTZ,
+        MnOres.ANTIMONITE, MnOres.FOSSIL_COAL, MnOres.ARGENTITE, MnOres.NEVYANSKITE,
+        MnOres.CASSITERITE, MnOres.PENTLANDITE, MnOres.HALITE, MnOres.WOLFRAMITE,
+        MnOres.URANINITE, MnOres.BAUXITE, MnOres.GALENA, MnOres.MOZANITE)
+    val samples = listOf(MnSamples.HEMATITE_SAMPLE, MnSamples.LIMONITE_SAMPLE, MnSamples.MALACHITE_SAMPLE,
+        MnSamples.AZURITE_SAMPLE, MnSamples.NATIVE_GOLD_SAMPLE, MnSamples.ULTRABASITE_SAMPLE,
+        MnSamples.CINNABAR_SAMPLE, MnSamples.QUARTZ_SAMPLE, MnSamples.ANTIMONITE_SAMPLE,
+        MnSamples.FOSSIL_COAL_SAMPLE, MnSamples.ARGENTITE_SAMPLE, MnSamples.NEVYANSKITE_SAMPLE,
+        MnSamples.CASSITERITE_SAMPLE, MnSamples.PENTLANDITE_SAMPLE, MnSamples.HALITE_SAMPLE,
+        MnSamples.URANINITE_SAMPLE, MnSamples.URANINITE_SAMPLE, MnSamples.BAUXITE_SAMPLE,
+        MnSamples.GALENA_SAMPLE, MnSamples.MOZANITE_SAMPLE)
+
     override fun onInitialize() {
         log("Mineralas Initialized")
         MnItems

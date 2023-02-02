@@ -1,6 +1,25 @@
 {
   "replace": false,
   "values": [
-    "mineralas:hematite_sample"
+    "mineralas:hematite_sample",
+    "mineralas:limonite_sample",
+    "mineralas:malachite_sample",
+    "mineralas:azurite_sample",
+    "mineralas:native_gold_sample",
+    "mineralas:ultrabasite_sample",
+    "mineralas:cinnabar_sample",
+    "mineralas:quartz_sample",
+    "mineralas:antimonite_sample",
+    "mineralas:fossil_coal_sample",
+    "mineralas:argentite_sample",
+    "mineralas:nevyanskite_sample",
+    "mineralas:cassiterite_sample",
+    "mineralas:pentlandite_sample",
+    "mineralas:halite_sample",
+    "mineralas:uraninite_sample",
+    "mineralas:uraninite_sample",
+    "mineralas:bauxite_sample",
+    "mineralas:galena_sample",
+    "mineralas:mozanite_sample"
   ]
 }

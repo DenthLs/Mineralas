@@ -8,21 +8,27 @@ import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.item.Item
 import net.minecraft.item.ItemStack
 import net.minecraft.item.ItemUsageContext
+import net.minecraft.server.network.ServerPlayerEntity
 import net.minecraft.text.LiteralText
 import net.minecraft.text.Text
 import net.minecraft.text.TranslatableText
 import net.minecraft.util.ActionResult
 import net.minecraft.util.Formatting
 import net.minecraft.world.World
+import java.util.*
 
 
-open class DowsingRod(settings: Settings) : Item(settings) {
+open class DowsingRod(settings: Settings, val height: Int) : Item(settings) {
     override fun useOnBlock(context: ItemUsageContext): ActionResult {
         if (context.world.isClient()) {
+            val stack = context.stack
             val positionClicked = context.blockPos
             val player = context.player
+            if (player is ServerPlayerEntity) {
+                stack.damage(1, Random(0), player)
+            }
             var foundBlock = false
-            for (i in 0..positionClicked.y + 64) {
+            for (i in 0..positionClicked.y + height) {
                 val blockBelow = context.world.getBlockState(positionClicked.down(i)).block
                 if (isValuableBlock(blockBelow)) {
                     outputValuableCoordinates(player!!, blockBelow)

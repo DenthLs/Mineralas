@@ -20,7 +20,11 @@ object MnItems {
 
     private val DOWSING_ROD: Item = register(
         "dowsing_rod",
-        DowsingRod(FabricItemSettings().group(itemGroup).maxCount(1).maxDamage(1200).rarity(Rarity.UNCOMMON))
+        DowsingRod(FabricItemSettings().group(itemGroup).maxCount(1).maxDamage(160).rarity(Rarity.UNCOMMON), 64)
+    )
+    private val ADVANCED_DOWSING_ROD: Item = register(
+        "advanced_dowsing_rod",
+        DowsingRod(FabricItemSettings().group(itemGroup).maxCount(1).maxDamage(380).rarity(Rarity.UNCOMMON), 128)
     )
 
     private fun register(name: String, item: Item) =

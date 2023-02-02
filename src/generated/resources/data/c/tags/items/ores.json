@@ -1,6 +1,25 @@
 {
   "replace": false,
   "values": [
-    "mineralas:hematite"
+    "mineralas:hematite",
+    "mineralas:limonite",
+    "mineralas:malachite",
+    "mineralas:azurite",
+    "mineralas:native_gold",
+    "mineralas:ultrabasite",
+    "mineralas:cinnabar",
+    "mineralas:quartz",
+    "mineralas:antimonite",
+    "mineralas:fossil_coal",
+    "mineralas:argentite",
+    "mineralas:nevyanskite",
+    "mineralas:cassiterite",
+    "mineralas:pentlandite",
+    "mineralas:halite",
+    "mineralas:wolframite",
+    "mineralas:uraninite",
+    "mineralas:bauxite",
+    "mineralas:galena",
+    "mineralas:mozanite"
   ]
 }

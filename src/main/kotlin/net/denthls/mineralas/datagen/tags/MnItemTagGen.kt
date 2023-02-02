@@ -1,6 +1,6 @@
 package net.denthls.mineralas.datagen.tags
 
-import net.denthls.mineralas.block.MnOres
+import net.denthls.mineralas.Mineralas
 import net.fabricmc.fabric.api.datagen.v1.FabricDataGenerator
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricTagProvider
 import net.minecraft.item.Item
@@ -11,15 +11,9 @@ class MnItemTagGen(dataGenerator: FabricDataGenerator) :
     FabricTagProvider<Item>(dataGenerator, Registry.ITEM, "Mineralas Block Tags") {
 
     override fun generateTags() {
-        for (element in ores) {
+        for (element in Mineralas.ores) {
             getOrCreateTagBuilder(MnTags.ORES_ITEM)
-                .add(element)
+                .add(element.asItem())
         }
-        getOrCreateTagBuilder(MnTags.HEMATITE_ORES_ITEM)
-            .add(MnOres.HEMATITE.asItem())
-//            .add(MnOres.DEEPSLATE_HEMATITE_ORE.asItem())
     }
-
-    private val ores = listOf(MnOres.HEMATITE.asItem())
-
 }
