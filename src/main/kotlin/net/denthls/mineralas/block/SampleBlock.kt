@@ -1,4 +1,4 @@
-package net.denthls.mineralas.block.custom
+package net.denthls.mineralas.block
 
 import net.minecraft.block.*
 import net.minecraft.util.math.BlockPos

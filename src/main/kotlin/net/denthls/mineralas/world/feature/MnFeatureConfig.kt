@@ -21,8 +21,7 @@ class MnFeatureConfig(
                     Identifier.CODEC.fieldOf("oreBlockId").forGetter(MnFeatureConfig::oreBlockId),
                     Codecs.POSITIVE_INT.fieldOf("size").forGetter(MnFeatureConfig::size),
                     Codec.STRING.fieldOf("height").forGetter(MnFeatureConfig::height)
-                ).apply(instance) { blockId: Identifier, oreBlockId: Identifier,
-                                    size: Int, height: String ->
+                ).apply(instance) { blockId: Identifier, oreBlockId: Identifier, size: Int, height: String ->
                     MnFeatureConfig(blockId, oreBlockId, size, height)
                 }
             }

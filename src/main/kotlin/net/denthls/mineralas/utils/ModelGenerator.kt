@@ -26,3 +26,29 @@ object ModelGenerator{
         }
     }
 }
+
+data class ModelJson(
+    val sample: Sample = Sample(),
+    val ore: Ore = Ore()
+) {
+    data class Sample(
+        val parent: String = "",
+        val textures: Textures = Textures()
+    ) {
+        data class Textures(
+            val particle: String = "",
+            val ore: String = "",
+            val _ore: String = "",
+            val stone: String = ""
+        )
+    }
+
+    data class Ore(
+        val parent: String = "",
+        val textures: Textures = Textures()
+    ) {
+        data class Textures(
+            val all: String = ""
+        )
+    }
+}

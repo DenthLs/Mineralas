@@ -39,14 +39,10 @@ data class Config(
         val depositRarity: Int = 10,
         val depositSize: Int = 16
     )
-    private fun isLoaded(name: String): Boolean{
-        return FabricLoader.getInstance().isModLoaded(name)
-    }
+    private fun isLoaded(name: String): Boolean = FabricLoader.getInstance().isModLoaded(name)
 }
 
-private fun isLoaded(name: String): Boolean{
-    return FabricLoader.getInstance().isModLoaded(name)
-}
+private fun isLoaded(name: String): Boolean = FabricLoader.getInstance().isModLoaded(name)
 
 
 
