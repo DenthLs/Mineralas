@@ -1,0 +1,9 @@
+{
+  "parent": "mineralas:block/sample",
+  "textures": {
+    "particle": "minecraft:block/stone",
+    "ore": "mineralas:block/azurite",
+    "_ore": "mineralas:block/azurite",
+    "stone": "minecraft:block/stone"
+  }
+}

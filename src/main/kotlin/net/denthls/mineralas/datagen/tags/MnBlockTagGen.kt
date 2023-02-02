@@ -13,10 +13,15 @@ class MnBlockTagGen(dataGenerator: FabricDataGenerator) :
         for (element in Mineralas.ores) {
             getOrCreateTagBuilder(MnTags.ORES)
                 .add(element)
+            getOrCreateTagBuilder(MnTags.MINEABLE)
+                .add(element)
         }
         for (element in Mineralas.samples) {
             getOrCreateTagBuilder(MnTags.SAMPLES)
                 .add(element)
+            getOrCreateTagBuilder(MnTags.MINEABLE)
+                .add(element)
         }
+
     }
 }

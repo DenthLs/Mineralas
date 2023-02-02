@@ -1,0 +1,9 @@
+{
+  "parent": "mineralas:block/sample",
+  "textures": {
+    "particle": "minecraft:block/stone",
+    "ore": "mineralas:block/antimonite",
+    "_ore": "mineralas:block/antimonite",
+    "stone": "minecraft:block/stone"
+  }
+}
