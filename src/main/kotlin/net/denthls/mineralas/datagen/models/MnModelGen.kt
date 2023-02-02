@@ -13,30 +13,36 @@ class MnModelGen(dataGenerator: FabricDataGenerator) : FabricModelProvider(dataG
     private val _ore: TextureKey = TextureKey.of("_ore")
     private val stone: TextureKey = TextureKey.of("stone")
     override fun generateBlockStateModels(blockStateModelGenerator: BlockStateModelGenerator) {
-        for (element in Mineralas.ores) {
-            val id = Registry.BLOCK.getId(element).path
+        Mineralas.ores.forEach { element ->
             blockStateModelGenerator.registerSimpleCubeAll(element)
-            blockStateModelGenerator.registerParentedItemModel(element, Identifier(Mineralas.MI, "block/$id"))
+            blockStateModelGenerator.registerParentedItemModel(element, Identifier(Mineralas.MI, "block/${
+                Registry.BLOCK.getId(element).path
+            }"))
         }
-        for (element in Mineralas.samples) {
-            val i = Registry.BLOCK.getId(element).path
-            registerSample(blockStateModelGenerator, i)
+        Mineralas.samples.forEach { element ->
+            registerSample(blockStateModelGenerator, Registry.BLOCK.getId(element).path)
         }
 
     }
+
     override fun generateItemModels(itemModelGenerator: ItemModelGenerator) {}
-    private fun registerSample(blockStateModelGenerator: BlockStateModelGenerator, id: String){
-        val block = Registry.BLOCK.get(Identifier(Mineralas.MI, id))
+
+    private fun registerSample(blockStateModelGenerator: BlockStateModelGenerator, id: String) {
         val m = id.dropLast(7)
-        blockStateModelGenerator.registerSingleton(block, TextureMap().put(TextureKey.PARTICLE, Identifier("minecraft:block/stone")).put(
-            ore,
-            Identifier(Mineralas.MI, "block/$m")
-        )
-            .put(_ore, Identifier(Mineralas.MI, "block/$m")).put(
-                stone,
-                Identifier("minecraft:block/stone")
-            ), Model(Optional.of(Identifier(Mineralas.MI, "block/sample")), Optional.empty(), TextureKey.PARTICLE, ore,
-                _ore, stone)
+        blockStateModelGenerator.registerSingleton(
+            Registry.BLOCK.get(Identifier(Mineralas.MI, id)),
+            TextureMap().put(TextureKey.PARTICLE, Identifier("minecraft:block/stone"))
+                .put(ore, Identifier(Mineralas.MI, "block/$m"))
+                .put(_ore, Identifier(Mineralas.MI, "block/$m"))
+                .put(stone, Identifier("minecraft:block/stone")),
+            Model(
+                Optional.of(Identifier(Mineralas.MI, "block/sample")),
+                Optional.empty(),
+                TextureKey.PARTICLE,
+                ore,
+                _ore,
+                stone
+            )
         )
     }
 }

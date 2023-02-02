@@ -11,9 +11,8 @@ class MnItemTagGen(dataGenerator: FabricDataGenerator) :
     FabricTagProvider<Item>(dataGenerator, Registry.ITEM, "Mineralas Block Tags") {
 
     override fun generateTags() {
-        for (element in Mineralas.ores) {
-            getOrCreateTagBuilder(MnTags.ORES_ITEM)
-                .add(element.asItem())
+        Mineralas.ores.forEach { element ->
+            getOrCreateTagBuilder(MnTags.ORES_ITEM).add(element.asItem())
         }
     }
 }

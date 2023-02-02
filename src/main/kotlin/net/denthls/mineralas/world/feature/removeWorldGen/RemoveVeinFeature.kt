@@ -10,26 +10,26 @@ import net.minecraft.world.gen.feature.OreFeatureConfig
 import net.minecraft.world.gen.feature.util.FeatureContext
 
 class RemoveVeinFeature(configCodec: Codec<OreFeatureConfig>?) : Feature<OreFeatureConfig>(configCodec) {
+
+    private val listCopper = listOf(Blocks.COPPER_ORE.defaultState, Blocks.RAW_COPPER_BLOCK.defaultState)
+    private val listIron = listOf(Blocks.DEEPSLATE_IRON_ORE.defaultState, Blocks.RAW_IRON_BLOCK.defaultState)
+
     override fun generate(context: FeatureContext<OreFeatureConfig>): Boolean {
-//        Actually not optimized, but now IDK how to improve it
+        // Actually not optimized, but now IDK how to improve it
         val world: StructureWorldAccess = context.world
-        val origin: BlockPos = context.origin
-        val chunkPos = ChunkPos(origin)
-        for (x in chunkPos.startX..chunkPos.endX){
-            for (z in chunkPos.startZ..chunkPos.endZ){
-                for (y in world.bottomY..64){
-                    val blockState = world.getBlockState(BlockPos(x, y, z))
-                    if (listCopper.contains(blockState)){
-                        world.setBlockState(BlockPos(x,y,z), Blocks.STONE.defaultState, 0x10)
-                    }
-                    if (listIron.contains(blockState)){
-                        world.setBlockState(BlockPos(x,y,z), Blocks.DEEPSLATE.defaultState, 0x10)
+        val chunkPos = ChunkPos(context.origin)
+        chunkPos.startX.rangeTo(chunkPos.endX).forEach { x ->
+            chunkPos.startZ.rangeTo(chunkPos.endZ).forEach { z ->
+                world.bottomY.rangeTo(64).forEach { y ->
+                    world.getBlockState(BlockPos(x, y, z)).apply {
+                        if (listCopper.contains(this))
+                            world.setBlockState(BlockPos(x, y, z), Blocks.STONE.defaultState, 0x10)
+                        if (listIron.contains(this))
+                            world.setBlockState(BlockPos(x, y, z), Blocks.DEEPSLATE.defaultState, 0x10)
                     }
                 }
             }
         }
         return true
     }
-    private val listCopper = listOf(Blocks.COPPER_ORE.defaultState, Blocks.RAW_COPPER_BLOCK.defaultState)
-    private val listIron = listOf(Blocks.DEEPSLATE_IRON_ORE.defaultState, Blocks.RAW_IRON_BLOCK.defaultState)
 }

@@ -8,10 +8,10 @@ object AllFeatures {
                 val features = biomes?.generationSettings?.features
                 if (features != null) {
                     for (g in features){
-                        log(g.toString())
+                        logger.info(g.toString())
                         for (i in g) {
-                            if (i is OrePlacedFeatures){
-                                log(i.toString())
+                            if (j is OrePlacedFeatures){
+                                logger.info(j.toString())
                             }
                         }
                     }

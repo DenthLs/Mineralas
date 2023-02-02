@@ -20,14 +20,12 @@ object GenerateVein {
         originPos: BlockPos, world: StructureWorldAccess, size: Int, targets: List<OreFeatureConfig.Target>,
         random: java.util.Random, height: String
     ) {
-        val originX = originPos.x
-        val originZ = originPos.z
         val newY = when (height) {
             "stone" -> Random.nextInt(15, 45)
             "deepslate" -> Random.nextInt(-45, -15)
             else -> Random.nextInt(15, 45)
         }
-        val blockPos = BlockPos(originX, newY, originZ)
+        val blockPos = BlockPos(originPos.x, newY, originPos.z)
         val f = random.nextFloat() * 3.1415927f
         val g = size.toFloat() / 8.0f
         val i = MathHelper.ceil((size.toFloat() / 16.0f * 2.0f + 1.0f) / 2.0f)
@@ -42,8 +40,8 @@ object GenerateVein {
         val p = blockPos.z - MathHelper.ceil(g) - i
         val q = 2 * (MathHelper.ceil(g) + i)
         val r = 2 * (2 + i)
-        for (s in n..n + q) {
-            for (t in p..p + q) {
+        (n..n + q).forEach { s ->
+            (p..p + q).forEach { t ->
                 if (o <= world.getTopY(Heightmap.Type.OCEAN_FLOOR_WG, s, t)) {
                     return generateVeinPart(
                         world,
@@ -99,11 +97,10 @@ object GenerateVein {
             e = MathHelper.lerp(f.toDouble(), startY, endY)
             g = MathHelper.lerp(f.toDouble(), startZ, endZ)
             h = random.nextDouble() * size.toDouble() / 16.0
-            val l = ((MathHelper.sin(3.1415927f * f) + 1.0f).toDouble() * h + 1.0) / 2.0
             ds[k * 4 + 0] = d
             ds[k * 4 + 1] = e
             ds[k * 4 + 2] = g
-            ds[k * 4 + 3] = l
+            ds[k * 4 + 3] = ((MathHelper.sin(3.1415927f * f) + 1.0f).toDouble() * h + 1.0) / 2.0
             ++k
         }
         var m: Int
@@ -117,13 +114,7 @@ object GenerateVein {
                         e = ds[k * 4 + 1] - ds[m * 4 + 1]
                         g = ds[k * 4 + 2] - ds[m * 4 + 2]
                         h = ds[k * 4 + 3] - ds[m * 4 + 3]
-                        if (h * h > d * d + e * e + g * g) {
-                            if (h > 0.0) {
-                                ds[m * 4 + 3] = -1.0
-                            } else {
-                                ds[k * 4 + 3] = -1.0
-                            }
-                        }
+                        if (h * h > d * d + e * e + g * g) if (h > 0.0) ds[m * 4 + 3] = -1.0 else ds[k * 4 + 3] = -1.0
                     }
                     ++m
                 }
@@ -131,7 +122,7 @@ object GenerateVein {
             ++k
         }
         val chunkSectionCache = ChunkSectionCache(world)
-        try {
+        runCatching {
             m = 0
             while (m < size) {
                 d = ds[m * 4 + 3]
@@ -202,13 +193,13 @@ object GenerateVein {
                 }
                 ++m
             }
-        } catch (var60: Throwable) {
-            try {
+        }.onFailure { throwable ->
+            runCatching {
                 chunkSectionCache.close()
-            } catch (var59: Throwable) {
-                var60.addSuppressed(var59)
+            }.onFailure {
+                throwable.addSuppressed(it)
             }
-            throw var60
+            throw throwable
         }
         chunkSectionCache.close()
     }
@@ -220,23 +211,15 @@ object GenerateVein {
         discardOnAirChance: Float,
         target: OreFeatureConfig.Target,
         pos: BlockPos.Mutable?
-    ): Boolean {
-        return if (!target.target.test(state, random)) {
-            false
-        } else if (shouldNotDiscard(random, discardOnAirChance)) {
-            true
-        } else {
-            !Feature.isExposedToAir(posToState, pos)
-        }
+    ): Boolean = when {
+        !target.target.test(state, random) -> false
+        shouldNotDiscard(random, discardOnAirChance) -> true
+        else -> !Feature.isExposedToAir(posToState, pos)
     }
 
-    private fun shouldNotDiscard(random: java.util.Random, chance: Float): Boolean {
-        return if (chance <= 0.0f) {
-            true
-        } else if (chance >= 1.0f) {
-            false
-        } else {
-            random.nextFloat() >= chance
-        }
+    private fun shouldNotDiscard(random: java.util.Random, chance: Float): Boolean = when {
+        chance <= 0.0f -> true
+        chance >= 1.0f -> false
+        else -> random.nextFloat() >= chance
     }
 }
