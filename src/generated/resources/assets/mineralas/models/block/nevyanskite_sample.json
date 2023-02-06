@@ -1,9 +1,0 @@
-{
-  "parent": "mineralas:block/sample",
-  "textures": {
-    "particle": "minecraft:block/stone",
-    "ore": "mineralas:block/nevyanskite",
-    "_ore": "mineralas:block/nevyanskite",
-    "stone": "minecraft:block/stone"
-  }
-}

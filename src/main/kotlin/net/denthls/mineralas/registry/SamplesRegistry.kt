@@ -15,47 +15,79 @@ object SamplesRegistry {
 
     private val SAMPLE: MutableMap<SampleBlock, Identifier> = LinkedHashMap()
 
-    val ANTIMONITE_SAMPLE = SampleBlock(FabricBlockSettings.of(Material.STONE).breakInstantly().sounds(BlockSoundGroup.STONE)).create("antimonite_sample")
-    val ARGENTITE_SAMPLE =  SampleBlock(FabricBlockSettings.of(Material.STONE).breakInstantly().sounds(BlockSoundGroup.STONE)).create("argentite_sample")
-    val AZURITE_SAMPLE = SampleBlock(FabricBlockSettings.of(Material.STONE).breakInstantly().sounds(BlockSoundGroup.STONE)).create("azurite_sample")
-    val BAUXITE_SAMPLE = SampleBlock(FabricBlockSettings.of(Material.STONE).breakInstantly().sounds(BlockSoundGroup.STONE)).create("bauxite_sample")
-    val CASSITERITE_SAMPLE = SampleBlock(FabricBlockSettings.of(Material.STONE).breakInstantly().sounds(BlockSoundGroup.STONE)).create("cassiterite_sample")
-    val CINNABAR_SAMPLE = SampleBlock(FabricBlockSettings.of(Material.STONE).breakInstantly().sounds(BlockSoundGroup.STONE)).create("cinnabar_sample")
-    val FOSSIL_COAL_SAMPLE = SampleBlock(FabricBlockSettings.of(Material.STONE).breakInstantly().sounds(BlockSoundGroup.STONE)).create("fossil_coal_sample")
-    val GALENA_SAMPLE = SampleBlock(FabricBlockSettings.of(Material.STONE).breakInstantly().sounds(BlockSoundGroup.STONE)).create("galena_sample")
-    val HALITE_SAMPLE = SampleBlock(FabricBlockSettings.of(Material.STONE).breakInstantly().sounds(BlockSoundGroup.STONE)).create("halite_sample")
-    val HEMATITE_SAMPLE = SampleBlock(FabricBlockSettings.of(Material.STONE).breakInstantly().sounds(BlockSoundGroup.STONE)).create("hematite_sample")
-    val LIMONITE_SAMPLE = SampleBlock(
-        FabricBlockSettings.of(Material.STONE).breakInstantly().sounds(BlockSoundGroup.STONE)
-    ).create("limonite_sample")
-    val MALACHITE_SAMPLE = SampleBlock(
-        FabricBlockSettings.of(Material.STONE).breakInstantly().sounds(BlockSoundGroup.STONE)
-    ).create("malachite_sample")
+    val IRON_SAMPLE = SampleBlock(
+        FabricBlockSettings.of(Material.STONE).breakInstantly().sounds(BlockSoundGroup.STONE).noCollision()
+    ).create("iron")
+    val COPPER_SAMPLE = SampleBlock(
+        FabricBlockSettings.of(Material.STONE).breakInstantly().sounds(BlockSoundGroup.STONE).noCollision()
+    ).create("copper")
+    val COAL_SAMPLE = SampleBlock(
+        FabricBlockSettings.of(Material.STONE).breakInstantly().sounds(BlockSoundGroup.STONE).noCollision()
+    ).create("coal")
+    val LAPIS_SAMPLE = SampleBlock(
+        FabricBlockSettings.of(Material.STONE).breakInstantly().sounds(BlockSoundGroup.STONE).noCollision()
+    ).create("lapis")
+    val GOLD_SAMPLE = SampleBlock(
+        FabricBlockSettings.of(Material.STONE).breakInstantly().sounds(BlockSoundGroup.STONE).noCollision()
+    ).create("gold")
+    val REDSTONE_SAMPLE = SampleBlock(
+        FabricBlockSettings.of(Material.STONE).breakInstantly().sounds(BlockSoundGroup.STONE).noCollision()
+    ).create("redstone")
+    val DIAMOND_SAMPLE = SampleBlock(
+        FabricBlockSettings.of(Material.STONE).breakInstantly().sounds(BlockSoundGroup.STONE).noCollision()
+    ).create("diamond")
+    val EMERALD_SAMPLE = SampleBlock(
+        FabricBlockSettings.of(Material.STONE).breakInstantly().sounds(BlockSoundGroup.STONE).noCollision()
+    ).create("emerald")
+    val ANTIMONY_SAMPLE = SampleBlock(
+        FabricBlockSettings.of(Material.STONE).breakInstantly().sounds(BlockSoundGroup.STONE).noCollision()
+    ).create("antimony")
+    val BAUXITE_SAMPLE = SampleBlock(
+        FabricBlockSettings.of(Material.STONE).breakInstantly().sounds(BlockSoundGroup.STONE).noCollision()
+    ).create("bauxite")
+    val IRIDIUM_SAMPLE = SampleBlock(
+        FabricBlockSettings.of(Material.STONE).breakInstantly().sounds(BlockSoundGroup.STONE).noCollision()
+    ).create("iridium")
+    val LEAD_SAMPLE = SampleBlock(
+        FabricBlockSettings.of(Material.STONE).breakInstantly().sounds(BlockSoundGroup.STONE).noCollision()
+    ).create("lead")
     val MOZANITE_SAMPLE = SampleBlock(
-        FabricBlockSettings.of(Material.STONE).breakInstantly().sounds(BlockSoundGroup.STONE)
-    ).create("mozanite_sample")
-    val NATIVE_GOLD_SAMPLE = SampleBlock(
-        FabricBlockSettings.of(Material.STONE).breakInstantly().sounds(BlockSoundGroup.STONE)
-    ).create("native_gold_sample")
-    val NEVYANSKITE_SAMPLE = SampleBlock(
-        FabricBlockSettings.of(Material.STONE).breakInstantly().sounds(BlockSoundGroup.STONE)
-    ).create("nevyanskite_sample")
-    val PENTLANDITE_SAMPLE = SampleBlock(
-        FabricBlockSettings.of(Material.STONE).breakInstantly().sounds(BlockSoundGroup.STONE)
-    ).create("pentlandite_sample")
+        FabricBlockSettings.of(Material.STONE).breakInstantly().sounds(BlockSoundGroup.STONE).noCollision()
+    ).create("mozanite")
+    val NICKEL_SAMPLE = SampleBlock(
+        FabricBlockSettings.of(Material.STONE).breakInstantly().sounds(BlockSoundGroup.STONE).noCollision()
+    ).create("nickel")
+    val SALT_SAMPLE = SampleBlock(
+        FabricBlockSettings.of(Material.STONE).breakInstantly().sounds(BlockSoundGroup.STONE).noCollision()
+    ).create("salt")
+    val TIN_SAMPLE = SampleBlock(
+        FabricBlockSettings.of(Material.STONE).breakInstantly().sounds(BlockSoundGroup.STONE).noCollision()
+    ).create("tin")
+    val TUNGSTEN_SAMPLE = SampleBlock(
+        FabricBlockSettings.of(Material.STONE).breakInstantly().sounds(BlockSoundGroup.STONE).noCollision()
+    ).create("tungsten")
+    val URANIUM_SAMPLE = SampleBlock(
+        FabricBlockSettings.of(Material.STONE).breakInstantly().sounds(BlockSoundGroup.STONE).noCollision()
+    ).create("uranium")
+    val RUBY_SAMPLE = SampleBlock(
+        FabricBlockSettings.of(Material.STONE).breakInstantly().sounds(BlockSoundGroup.STONE).noCollision()
+    ).create("ruby")
+    val SAPPHIRE_SAMPLE = SampleBlock(
+        FabricBlockSettings.of(Material.STONE).breakInstantly().sounds(BlockSoundGroup.STONE).noCollision()
+    ).create("sapphire")
+    val SILVER_SAMPLE = SampleBlock(
+        FabricBlockSettings.of(Material.STONE).breakInstantly().sounds(BlockSoundGroup.STONE).noCollision()
+    ).create("silver")
     val QUARTZ_SAMPLE = SampleBlock(
-        FabricBlockSettings.of(Material.STONE).breakInstantly().sounds(BlockSoundGroup.STONE)
-    ).create("quartz_sample")
-    val ULTRABASITE_SAMPLE = SampleBlock(
-        FabricBlockSettings.of(Material.STONE).breakInstantly().sounds(BlockSoundGroup.STONE)
-    ).create("ultrabasite_sample")
-    val URANINITE_SAMPLE = SampleBlock(
-        FabricBlockSettings.of(Material.STONE).breakInstantly().sounds(BlockSoundGroup.STONE)
-    ).create("uraninite_sample")
+        FabricBlockSettings.of(Material.STONE).breakInstantly().sounds(BlockSoundGroup.STONE).noCollision()
+    ).create("quartz")
+    val NIKOLITE_SAMPLE = SampleBlock(
+        FabricBlockSettings.of(Material.STONE).breakInstantly().sounds(BlockSoundGroup.STONE).noCollision()
+    ).create("nikolite")
 
     val STONE_SAMPLE = SampleBlock(
-        FabricBlockSettings.of(Material.STONE).breakInstantly().sounds(BlockSoundGroup.STONE)
-    ).create("stone_sample")
+        FabricBlockSettings.of(Material.STONE).breakInstantly().sounds(BlockSoundGroup.STONE).noCollision()
+    ).create("stone")
 
     init {
         SAMPLE.keys.forEach {
@@ -68,7 +100,15 @@ object SamplesRegistry {
     }
 
     private fun SampleBlock.create(name: String): SampleBlock {
-        SAMPLE[this] = Identifier(Mineralas.MI, name)
+        SAMPLE[this] = Identifier(Mineralas.MI, name + "_sample")
         return this
     }
+
+    val samples = setOf(
+        IRON_SAMPLE, COPPER_SAMPLE, COAL_SAMPLE, LAPIS_SAMPLE, GOLD_SAMPLE, REDSTONE_SAMPLE,
+        DIAMOND_SAMPLE, EMERALD_SAMPLE, ANTIMONY_SAMPLE, BAUXITE_SAMPLE, IRIDIUM_SAMPLE, LEAD_SAMPLE,
+        MOZANITE_SAMPLE, NICKEL_SAMPLE, SALT_SAMPLE, TIN_SAMPLE, TUNGSTEN_SAMPLE,
+        URANIUM_SAMPLE, RUBY_SAMPLE, SAPPHIRE_SAMPLE, SILVER_SAMPLE, QUARTZ_SAMPLE, STONE_SAMPLE, NIKOLITE_SAMPLE
+    )
+
 }

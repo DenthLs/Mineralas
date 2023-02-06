@@ -8,21 +8,19 @@ import net.minecraft.world.gen.feature.FeatureConfig
 
 
 class MnFeatureConfig(
-    val blockId: Identifier,
-    val oreBlockId: Identifier,
+    val sampleId: Identifier,
+    val oreId: Identifier,
     val size: Int,
-    val height: String
 ) : FeatureConfig {
     companion object {
         val CODEC: Codec<MnFeatureConfig> =
             RecordCodecBuilder.create { instance: RecordCodecBuilder.Instance<MnFeatureConfig> ->
                 instance.group(
-                    Identifier.CODEC.fieldOf("blockId").forGetter(MnFeatureConfig::blockId),
-                    Identifier.CODEC.fieldOf("oreBlockId").forGetter(MnFeatureConfig::oreBlockId),
+                    Identifier.CODEC.fieldOf("sampleId").forGetter(MnFeatureConfig::sampleId),
+                    Identifier.CODEC.fieldOf("oreId").forGetter(MnFeatureConfig::oreId),
                     Codecs.POSITIVE_INT.fieldOf("size").forGetter(MnFeatureConfig::size),
-                    Codec.STRING.fieldOf("height").forGetter(MnFeatureConfig::height)
-                ).apply(instance) { blockId: Identifier, oreBlockId: Identifier, size: Int, height: String ->
-                    MnFeatureConfig(blockId, oreBlockId, size, height)
+                ).apply(instance) { sampleId: Identifier, oreId: Identifier, size: Int ->
+                    MnFeatureConfig(sampleId, oreId, size)
                 }
             }
     }

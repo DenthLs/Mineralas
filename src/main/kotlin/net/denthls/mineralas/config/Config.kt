@@ -9,41 +9,50 @@ data class Config(
         "First line is the rarity, the lower the value, the more deposits",
         "Second line is the size of deposit"
     ),
-    val hematiteDeposit: Deposit = Deposit(true, 30, 32),
-    val limoniteDeposit: Deposit = Deposit(true, 30, 32),
-    val malachiteDeposit: Deposit = Deposit(true, 30, 32),
-    val azuriteDeposit: Deposit = Deposit(true, 30, 32),
-    val nativeGoldDeposit: Deposit = Deposit(true, 30, 32),
-    val ultrabasiteDeposit: Deposit = Deposit(true, 30, 32),
-    val cinnabarDeposit: Deposit = Deposit(true, 30, 32),
-    val quartzDeposit: Deposit = Deposit(true, 30, 32),
-    val antimoniteDeposit: Deposit = Deposit(isLoaded("modern_industrialization"), 30, 32),
-    val fossilCoalDeposit: Deposit = Deposit(true, 30, 32),
-    val argentiteDeposit: Deposit = Deposit(true, 30, 32),
-    val nevyanskiteDeposit: Deposit = Deposit(true, 30, 32),
-    val cassiteriteDeposit: Deposit = Deposit(true, 30, 32),
-    val pentlanditeDeposit: Deposit = Deposit(true, 30, 32),
-    val haliteDeposit: Deposit = Deposit(true, 30, 32),
-    val wolframiteDeposit: Deposit = Deposit(true, 30, 32),
-    val uraniniteDeposit: Deposit = Deposit(true, 30, 32),
-    val bauxiteDeposit: Deposit = Deposit(true, 30, 32),
-    val galenaDeposit: Deposit = Deposit(true, 30, 32),
-    val mozaniteDeposit: Deposit = Deposit(true, 30, 32),
+    val ironDeposit: Deposit = Deposit(true, 50, 64),
+    val copperDeposit: Deposit = Deposit(true, 50, 64),
+    val goldDeposit: Deposit = Deposit(true, 50, 64),
+    val coalDeposit: Deposit = Deposit(true, 50, 64),
+    val lapisDeposit: Deposit = Deposit(true, 50, 32),
+    val redstoneDeposit: Deposit = Deposit(true, 50, 32),
+    val diamondDeposit: Deposit = Deposit(true, 50, 32),
+    val emeraldDeposit: Deposit = Deposit(true, 50, 32),
+    val antimonyDeposit: Deposit = Deposit(MI, 50, 32),
+    val bauxiteDeposit: Deposit = Deposit(MI || TR, 50, 32),
+    val tinDeposit: Deposit = Deposit(MI || TR || IR, 50, 32),
+    val iridiumDeposit: Deposit = Deposit(MI, 50, 32),
+    val leadDeposit: Deposit = Deposit(MI || TR || IR, 50, 32),
+    val ligniteCoalDeposit: Deposit = Deposit(MI, 50, 32),
+    val mozaniteDeposit: Deposit = Deposit(MI, 50, 32),
+    val nickelDeposit: Deposit = Deposit(MI, 50, 32),
+    val saltDeposit: Deposit = Deposit(MI, 50, 32),
+    val tungstenDeposit: Deposit = Deposit(MI || IR, 50, 32),
+    val uraniumDeposit: Deposit = Deposit(MI || PW, 50, 32),
+    val rubyDeposit: Deposit = Deposit(TR, 50, 32),
+    val sapphireDeposit: Deposit = Deposit(TR, 50, 32),
+    val silverDeposit: Deposit = Deposit(TR || IR, 50, 32),
+    val quartzDeposit: Deposit = Deposit(AE, 50, 32),
+    val nikoliteDeposit: Deposit = Deposit(IR, 50, 32)
 ) {
     @Serializable
     data class Comment(
         val firstLine: String = "",
-        val secondLine: String= ""
+        val secondLine: String = ""
     )
+
     @Serializable
     data class Deposit(
         val depositEnabled: Boolean = true,
         val depositRarity: Int = 10,
         val depositSize: Int = 16
     )
-    private fun isLoaded(name: String): Boolean = FabricLoader.getInstance().isModLoaded(name)
 }
 
+private val PW: Boolean = isLoaded("powah")
+private val AE: Boolean = isLoaded("ae2")
+private val TR: Boolean = isLoaded("tech_reborn")
+private val MI: Boolean = isLoaded("modern_industrialization")
+private val IR: Boolean = isLoaded("indrev")
 private fun isLoaded(name: String): Boolean = FabricLoader.getInstance().isModLoaded(name)
 
 

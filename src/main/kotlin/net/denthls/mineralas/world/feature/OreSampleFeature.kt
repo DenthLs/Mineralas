@@ -1,7 +1,8 @@
 package net.denthls.mineralas.world.feature
 
 import com.mojang.serialization.Codec
-import net.denthls.mineralas.Mineralas.logger
+import net.denthls.mineralas.registry.SamplesRegistry.STONE_SAMPLE
+import net.denthls.mineralas.registry.SamplesRegistry.samples
 import net.denthls.mineralas.world.GenerateDeposit
 import net.denthls.mineralas.world.feature.featureConfigs.MnFeatureConfig
 import net.minecraft.block.Block
@@ -11,6 +12,7 @@ import net.minecraft.tag.BlockTags
 import net.minecraft.tag.TagKey
 import net.minecraft.util.Identifier
 import net.minecraft.util.math.BlockPos
+import net.minecraft.util.math.ChunkPos
 import net.minecraft.util.registry.Registry
 import net.minecraft.world.StructureWorldAccess
 import net.minecraft.world.gen.feature.Feature
@@ -26,124 +28,48 @@ open class OreSampleFeature(configCodec: Codec<MnFeatureConfig>) : Feature<MnFea
         val world: StructureWorldAccess = context.world
         val config: MnFeatureConfig = context.config
 
-        val height: String = config.height
-
-        val blockState: BlockState = Registry.BLOCK.get(config.blockId).defaultState
-        var blockPos = surface(context.origin)
-        var testPos: BlockPos
-        var count = 0
-        val maxCountSamples = 7
-
-        (50..world.topY).forEach { _ ->
-            blockPos = blockPos.up()
-            if (surfaceContains(world.getBlockState(blockPos))) {
-                if (isAirUpToThree(world, blockPos)) {
-                    testPos = blockPos
-                    GenerateDeposit.generateOre(
-                        testPos,
-                        world,
-                        config.size,
-                        createTarget(height, config.oreBlockId),
-                        height
-                    )
-                    logger.info("Generated")
-                    world.setBlockState(testPos.up(), blockState, 3)
-                    testPos = testPos.add(4, 0, 4)
-                    (1..9).forEach { _ ->
-                        (1..9).forEach { _ ->
-                            if (surfaceContains(world.getBlockState(testPos.down()))) {
-                                if (isAirUpToThree(world, testPos) &&
-                                    surfaceContains(world.getBlockState(testPos.up(airUpToThree(world, testPos) - 1)))
-                                ) {
-                                    if (Random.nextInt(1, 100) > 94) {
-                                        world.setBlockState(
-                                            testPos.up(airUpToThree(world, testPos)),
-                                            blockState,
-                                            3
-                                        )
-                                        count++
-                                        if (count == maxCountSamples) return true
-                                    }
-                                }
-                            } else {
-                                if (isSurfaceDownToThree(world, testPos.down())) {
-                                    if (airContains(
-                                            world.getBlockState(
-                                                testPos.up(
-                                                    airUpToThree(
-                                                        world,
-                                                        testPos
-                                                    ) + 1
-                                                )
-                                            )
-                                        )
-                                    ) {
-                                        if (Random.nextInt(1, 100) > 94) {
-                                            world.setBlockState(
-                                                testPos.down(surfaceDownToThree(world, testPos)),
-                                                blockState,
-                                                3
-                                            )
-                                            count++
-                                            if (count == maxCountSamples) return true
-                                        }
-                                    }
-                                }
-                            }
-                            testPos = testPos.add(0, 0, -1)
-                        }
-                        testPos = testPos.add(0, 0, 9)
-                        testPos = testPos.add(-1, 0, 0)
+        val blockState: BlockState = Registry.BLOCK.get(config.sampleId).defaultState
+        val chunkPos = ChunkPos(context.origin)
+        val height = if (Random.nextFloat() > 0.5) "stone" else "deepslate"
+        var orePath = config.oreId.path
+        val oreNamespace = config.oreId.namespace
+        if (height == "deepslate") orePath = "deepslate_$orePath"
+        val oreId = Identifier(oreNamespace, orePath)
+        (chunkPos.startX..chunkPos.endX).forEach { x ->
+            (chunkPos.startZ..chunkPos.endZ).forEach { z ->
+                (50..160).forEach y@{ y ->
+                    val blockPos = BlockPos(x, y, z)
+                    samples.minus(STONE_SAMPLE).forEach {
+                        if (it.defaultState.equals(world.getBlockState(blockPos))) return false
                     }
-                    return true
                 }
             }
         }
-        return false
-    }
-
-    private fun isSurfaceDownToThree(world: StructureWorldAccess, pos: BlockPos): Boolean {
-        var blockPos = pos.down()
-        var currentBlockState: BlockState
-        (0..3).forEach { _ ->
-            currentBlockState = world.getBlockState(blockPos)
-            if (surfaceContains(currentBlockState)) return true
-            blockPos = blockPos.down()
+        var count = 0
+        (chunkPos.startX..chunkPos.endX).forEach { x ->
+            (chunkPos.startZ..chunkPos.endZ).forEach { z ->
+                (50..160).forEach y@{ y ->
+                    val blockPos = BlockPos(x, y, z)
+                    if (surfaceContains(world.getBlockState(blockPos)) && world.getBlockState(blockPos.up()).isAir
+                        && world.getBlockState(blockPos.up(2)).isAir
+                        && Random.nextInt(1, 100) > 94
+                        && blockPos.up().getNeighbor(world)
+                    ) {
+                        world.setBlockState(blockPos.up(), blockState, 3)
+                        if (count > 7) return true else ++count
+                        return@y
+                    }
+                }
+            }
         }
-        return false
-    }
-
-    private fun surfaceDownToThree(world: StructureWorldAccess, pos: BlockPos): Int {
-        var blockPos = pos.down()
-        var currentBlockState: BlockState
-        (0..3).forEach { i ->
-            currentBlockState = world.getBlockState(blockPos)
-            if (surfaceContains(currentBlockState)) return i
-            blockPos = blockPos.down()
-        }
-        return 0
-    }
-
-    private fun isAirUpToThree(world: StructureWorldAccess, pos: BlockPos): Boolean {
-        var blockPos = pos
-        var currentBlockState: BlockState
-        (0..3).forEach { _ ->
-            currentBlockState = world.getBlockState(blockPos)
-            if (airContains(currentBlockState)) return true
-            blockPos = blockPos.up()
-        }
-        return false
-    }
-
-    private fun airUpToThree(world: StructureWorldAccess, pos: BlockPos): Int {
-        var blockPos = pos
-        var currentBlockState: BlockState
-        (0..3).forEach { i ->
-            currentBlockState = world.getBlockState(blockPos)
-            if (airContains(currentBlockState)) return i
-            blockPos = blockPos.up()
-        }
-        return 0
+        GenerateDeposit.generateOre(
+            BlockPos(ChunkPos(context.origin).centerX, 80, ChunkPos(context.origin).centerZ),
+            world,
+            config.size,
+            createTarget(height, oreId),
+            height
+        )
+        return true
     }
 
     private val tags: List<TagKey<Block>> =
@@ -157,17 +83,6 @@ open class OreSampleFeature(configCodec: Codec<MnFeatureConfig>) : Feature<MnFea
         return false
     }
 
-    private val airBlocks: List<Block> = listOf(Blocks.SNOW, Blocks.AIR, Blocks.GRASS)
-
-    private fun airContains(blockState: BlockState): Boolean {
-        (0..2).forEach { i ->
-            if (blockState.isOf(airBlocks[i])) return true
-        }
-        return false
-    }
-
-    private fun surface(blockPos: BlockPos): BlockPos = BlockPos(blockPos.x, 50, blockPos.z)
-
     private fun createTarget(height: String, blockId: Identifier): List<OreFeatureConfig.Target> =
         listOf(
             OreFeatureConfig.createTarget(
@@ -179,4 +94,14 @@ open class OreSampleFeature(configCodec: Codec<MnFeatureConfig>) : Feature<MnFea
             )
         )
 
+    private fun BlockPos.getNeighbor(world: StructureWorldAccess): Boolean {
+        (-1..1).forEach { y ->
+            (-1..1).forEach { x ->
+                (-1..1).forEach { z ->
+                    if (samples.contains(world.getBlockState(this.add(x, y, z)).block)) return false
+                }
+            }
+        }
+        return true
+    }
 }

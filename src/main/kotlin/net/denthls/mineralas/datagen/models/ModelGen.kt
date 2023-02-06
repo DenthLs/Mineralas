@@ -1,6 +1,8 @@
 package net.denthls.mineralas.datagen.models
 
 import net.denthls.mineralas.Mineralas
+import net.denthls.mineralas.registry.SamplesRegistry.STONE_SAMPLE
+import net.denthls.mineralas.registry.SamplesRegistry.samples
 import net.fabricmc.fabric.api.datagen.v1.FabricDataGenerator
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricModelProvider
 import net.minecraft.data.client.*
@@ -13,31 +15,19 @@ class ModelGen(dataGenerator: FabricDataGenerator) : FabricModelProvider(dataGen
     private val _ore: TextureKey = TextureKey.of("_ore")
     private val stone: TextureKey = TextureKey.of("stone")
     override fun generateBlockStateModels(blockStateModelGenerator: BlockStateModelGenerator) {
-        Mineralas.ores.forEach { element ->
-            blockStateModelGenerator.registerSimpleCubeAll(element)
-            blockStateModelGenerator.registerParentedItemModel(
-                element, Identifier(
-                    Mineralas.MI, "block/${
-                        Registry.BLOCK.getId(element).path
-                    }"
-                )
-            )
-        }
-        Mineralas.samples.forEach { element ->
+        samples.minus(STONE_SAMPLE).forEach { element ->
             registerSample(blockStateModelGenerator, Registry.BLOCK.getId(element).path)
         }
-
     }
 
     override fun generateItemModels(itemModelGenerator: ItemModelGenerator) {}
 
     private fun registerSample(blockStateModelGenerator: BlockStateModelGenerator, id: String) {
-        val m = id.dropLast(7)
         blockStateModelGenerator.registerSingleton(
             Registry.BLOCK.get(Identifier(Mineralas.MI, id)),
             TextureMap().put(TextureKey.PARTICLE, Identifier("minecraft:block/stone"))
-                .put(ore, Identifier(Mineralas.MI, "block/$m"))
-                .put(_ore, Identifier(Mineralas.MI, "block/$m"))
+                .put(ore, Identifier(Mineralas.MI, "block/$id"))
+                .put(_ore, Identifier(Mineralas.MI, "block/$id"))
                 .put(stone, Identifier("minecraft:block/stone")),
             Model(
                 Optional.of(Identifier(Mineralas.MI, "block/sample")),

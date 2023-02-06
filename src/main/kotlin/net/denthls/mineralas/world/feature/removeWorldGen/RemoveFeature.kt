@@ -110,6 +110,23 @@ object RemoveFeature {
                     }
                 }
             }
+            if (FabricLoader.getInstance().isModLoaded("indrev")) {
+                if (RemoveConfig().indrevFeatures.removeEnabled) {
+                    RemoveConfig().indrevFeatures.toRemove.forEach { element ->
+                        runCatching {
+                            context.generationSettings.removeFeature(
+                                RegistryKey.of(
+                                    Registry.PLACED_FEATURE_KEY,
+                                    Identifier("indrev", element)
+                                )
+                            )
+                        }.onFailure {
+                            logger.info("Feature isn't exist: $element")
+                            logger.info(it.localizedMessage)
+                        }
+                    }
+                }
+            }
             if (RemoveConfig().anotherFeatures.removeEnabled) {
                 RemoveConfig().anotherFeatures.toRemove.forEach { element ->
                     runCatching {

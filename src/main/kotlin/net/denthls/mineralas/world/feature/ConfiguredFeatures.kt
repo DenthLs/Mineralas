@@ -7,6 +7,7 @@ import net.denthls.mineralas.world.feature.featureConfigs.SampleFeatureConfig
 import net.denthls.mineralas.world.feature.removeWorldGen.RemoveVeinFeature
 import net.fabricmc.fabric.api.biome.v1.BiomeModifications
 import net.fabricmc.fabric.api.biome.v1.BiomeSelectors
+import net.fabricmc.loader.api.FabricLoader
 import net.minecraft.block.Blocks
 import net.minecraft.util.Identifier
 import net.minecraft.util.registry.BuiltinRegistries
@@ -21,101 +22,80 @@ import net.minecraft.world.gen.placementmodifier.RarityFilterPlacementModifier
 
 object ConfiguredFeatures {
 
-    private val hematiteDeposit = featureList("hematite", "stone")
-    private val limoniteDeposit = featureList("limonite", "deepslate")
-    private val malachiteDeposit = featureList("malachite", "stone")
-    private val azuriteDeposit = featureList("azurite", "deepslate")
-    private val nativeGoldDeposit = featureList("native_gold", "deepslate")
-    private val ultrabasiteDeposit = featureList("ultrabasite", "deepslate")
-    private val cinnabarDeposit = featureList("cinnabar", "deepslate")
-    private val quartzDeposit = featureList("quartz", "stone")
-    private val antimoniteDeposit = featureList("antimonite", "stone")
-    private val fossilCoalDeposit = featureList("fossil_coal", "stone")
-    private val argentiteDeposit = featureList("argentite", "deepslate")
-    private val nevyanskiteDeposit = featureList("nevyanskite", "deepslate")
-    private val cassiteriteDeposit = featureList("cassiterite", "stone")
-    private val pentlanditeDeposit = featureList("pentlandite", "stone")
-    private val haliteDeposit = featureList("halite", "stone")
-    private val wolframiteDeposit = featureList("wolframite", "deepslate")
-    private val uraniniteDeposit = featureList("uraninite", "deepslate")
-    private val bauxiteDeposit = featureList("bauxite", "stone")
-    private val galenaDeposit = featureList("galena", "stone")
-    private val mozaniteDeposit = featureList("mozanite", "deepslate")
+    private val MI = "modern_industrialization"
+    private val TR = "techreborn"
+    private val M = "minecraft"
+    private val PW = "powah"
+    private val IR = "indrev"
 
     private val deposits = listOf(
-        hematiteDeposit,
-        limoniteDeposit,
-        malachiteDeposit,
-        azuriteDeposit,
-        nativeGoldDeposit,
-        ultrabasiteDeposit,
-        cinnabarDeposit,
-        quartzDeposit,
-        antimoniteDeposit,
-        fossilCoalDeposit,
-        argentiteDeposit,
-        nevyanskiteDeposit,
-        cassiteriteDeposit,
-        pentlanditeDeposit,
-        haliteDeposit,
-        wolframiteDeposit,
-        uraniniteDeposit,
-        bauxiteDeposit,
-        galenaDeposit,
-        mozaniteDeposit
-    )
+        featureList("$M:iron_ore", "iron"),
+        featureList("$M:copper_ore", "copper"),
+        featureList("$M:coal_ore", "coal"),
+        featureList("$M:lapis_ore", "lapis"),
+        featureList("$M:gold_ore", "gold"),
+        featureList("$M:redstone_ore", "redstone"),
+        featureList("$M:diamond_ore", "diamond"),
+        featureList("$M:emerald_ore", "emerald"),
+        featureList("$MI:antimony_ore", "antimony"),
+        featureList("$MI:bauxite_ore", "bauxite"),
+        featureList("$MI:iridium_ore", "iridium"),
+        featureList("$MI:lead_ore", "lead"),
+        featureList("$MI:lignite_coal_ore", "coal"),
+        featureList("$MI:mozanite_ore", "mozanite"),
+        featureList("$MI:nickel_ore", "nickel"),
+        featureList("$MI:salt_ore", "salt"),
+        featureList("$MI:tin_ore", "tin"),
+        featureList("$MI:tungsten_ore", "tungsten"),
+        featureList("$MI:uranium_ore", "uranium"),
+        featureList("$TR:bauxite_ore", "bauxite"),
+        featureList("$TR:lead_ore", "lead"),
+        featureList("$TR:tin_ore", "tin"),
+        featureList("$TR:galena_ore", "lead"),
+        featureList("$TR:ruby_ore", "ruby"),
+        featureList("$TR:silver_ore", "silver"),
+        featureList("$TR:sapphire_ore", "sapphire"),
+        featureList("$PW:uraninite_ore", "uranium"),
+        featureList("$PW:uraninite_ore_poor", "uranium"),
+        featureList("$PW:uraninite_ore_dense", "uranium"),
+        featureList("ae2:quartz_ore", "quartz"),
+        featureList("$IR:tungsten_ore", "tungsten"),
+        featureList("$IR:tin_ore", "tin"),
+        featureList("$IR:silver_ore", "silver"),
+        featureList("$IR:lead_ore", "lead"),
+        featureList("$IR:nikolite_ore", "nikolite"),
 
-    private val depositsProps = listOf(
-        Config().hematiteDeposit,
-        Config().limoniteDeposit,
-        Config().malachiteDeposit,
-        Config().azuriteDeposit,
-        Config().nativeGoldDeposit,
-        Config().ultrabasiteDeposit,
-        Config().cinnabarDeposit,
-        Config().quartzDeposit,
-        Config().antimoniteDeposit,
-        Config().fossilCoalDeposit,
-        Config().argentiteDeposit,
-        Config().nevyanskiteDeposit,
-        Config().cassiteriteDeposit,
-        Config().pentlanditeDeposit,
-        Config().haliteDeposit,
-        Config().wolframiteDeposit,
-        Config().uraniniteDeposit,
-        Config().bauxiteDeposit,
-        Config().galenaDeposit,
-        Config().mozaniteDeposit
-    )
+        )
 
     fun generateOres() {
-        depositsProps.indices.forEach { i ->
-            if (depositsProps[i].depositEnabled)
-                register(deposits[i], depositsProps[i].depositRarity, depositsProps[i].depositSize)
+        deposits.forEach {
+            register(it)
         }
     }
 
-    private fun featureList(name: String, height: String): List<String> =
-        listOf(name + "_ore", name + "_sample", name, height)
+    private fun featureList(name: String, samplePath: String): List<String> =
+        listOf(name + "_feature", samplePath + "_sample", name, samplePath)
 
-    private fun register(list: List<String>, rarity: Int, size: Int) {
-        registerFeature(list[0], list[1], list[2], list[3], rarity, size)
+    private fun register(list: List<String>) {
+        val props: Config.Deposit = depositConfig(list[3])
+        if (props.depositEnabled && FabricLoader.getInstance().isModLoaded(Identifier(list[0]).namespace)) {
+            registerFeature(list[0], list[1], list[2], props.depositRarity, props.depositSize)
+        }
     }
 
     private fun registerFeature(
         featureId: String,
-        sampleId: String,
-        oreBlockId: String,
-        height: String,
+        samplePath: String,
+        oreId: String,
         rarity: Int,
         size: Int
     ) {
-        val id = Identifier(Mineralas.MI, featureId)
+        val id = Identifier(featureId)
         val feature: Feature<MnFeatureConfig> = OreSampleFeature(MnFeatureConfig.CODEC)
         val configuredFeature: ConfiguredFeature<MnFeatureConfig, OreSampleFeature> =
             ConfiguredFeature<MnFeatureConfig, OreSampleFeature>(
                 feature as OreSampleFeature,
-                MnFeatureConfig(Identifier(Mineralas.MI, sampleId), Identifier(Mineralas.MI, oreBlockId), size, height)
+                MnFeatureConfig(Identifier(Mineralas.MI, samplePath), Identifier(oreId), size)
             )
 
         val placedFeature = PlacedFeature(
@@ -169,7 +149,8 @@ object ConfiguredFeatures {
     }
 
     fun stoneSample(
-        featurePath: String
+        featurePath: String,
+        blockPath: String
     ) {
         val id = Identifier(Mineralas.MI, featurePath)
         val feature: Feature<SampleFeatureConfig> = StoneSampleFeature(SampleFeatureConfig.CODEC)
@@ -177,7 +158,7 @@ object ConfiguredFeatures {
             ConfiguredFeature<SampleFeatureConfig, StoneSampleFeature>(
                 feature as StoneSampleFeature,
                 SampleFeatureConfig(
-                    Identifier("mineralas:stone_sample"), 1
+                    Identifier("mineralas", blockPath), 98
                 )
             )
 
@@ -195,6 +176,36 @@ object ConfiguredFeatures {
             GenerationStep.Feature.VEGETAL_DECORATION,
             RegistryKey.of(Registry.PLACED_FEATURE_KEY, id)
         )
+    }
+
+    private fun depositConfig(name: String): Config.Deposit {
+        return when (name) {
+            "iron" -> Config().ironDeposit
+            "coal" -> Config().coalDeposit
+            "copper" -> Config().copperDeposit
+            "gold" -> Config().goldDeposit
+            "lapis" -> Config().lapisDeposit
+            "redstone" -> Config().redstoneDeposit
+            "diamond" -> Config().diamondDeposit
+            "emerald" -> Config().emeraldDeposit
+            "antimony" -> Config().antimonyDeposit
+            "bauxite" -> Config().bauxiteDeposit
+            "tin" -> Config().tinDeposit
+            "iridium" -> Config().iridiumDeposit
+            "lead" -> Config().leadDeposit
+            "lignite_coal" -> Config().ligniteCoalDeposit
+            "mozanite" -> Config().mozaniteDeposit
+            "nickel" -> Config().nickelDeposit
+            "salt" -> Config().saltDeposit
+            "tungsten" -> Config().tungstenDeposit
+            "uranium" -> Config().uraniumDeposit
+            "ruby" -> Config().rubyDeposit
+            "sapphire" -> Config().sapphireDeposit
+            "silver" -> Config().silverDeposit
+            "quartz" -> Config().quartzDeposit
+            "nikolite" -> Config().nikoliteDeposit
+            else -> Config().ironDeposit
+        }
     }
 
 }

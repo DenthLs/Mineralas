@@ -26,7 +26,6 @@ data class RemoveConfig(
         true,
         listOf(
             "bauxite_ore",
-            "cinnabar_ore",
             "galena_ore",
             "sapphire_ore",
             "lead_ore",
@@ -36,7 +35,22 @@ data class RemoveConfig(
             "iridium_ore"
         )
     ),
-    val powahFeatures: Remove = Remove(true, listOf("uraninite_ore_poor", "uraninite_ore", "uraninite_ore_dense")),
+    val indrevFeatures: Remove = Remove(
+        true, listOf(
+            "nikolite_ore",
+            "tin_ore",
+            "silver_ore",
+            "tungsten_ore",
+            "lead_ore"
+        )
+    ),
+    val powahFeatures: Remove = Remove(
+        true, listOf(
+            "uraninite_ore_poor",
+            "uraninite_ore",
+            "uraninite_ore_dense"
+        )
+    ),
     val defaultFeatures: Remove = Remove(
         true, listOf(
             "copper",
