@@ -1,7 +1,7 @@
 package net.denthls.mineralas.world.feature.removeWorldGen
 
 import net.denthls.mineralas.Mineralas.logger
-import net.denthls.mineralas.config.RemoveConfig
+import net.denthls.mineralas.config.ConfigManager
 import net.fabricmc.fabric.api.biome.v1.BiomeModificationContext
 import net.fabricmc.fabric.api.biome.v1.BiomeModifications
 import net.fabricmc.fabric.api.biome.v1.BiomeSelectors
@@ -16,8 +16,8 @@ object RemoveFeature {
         BiomeModifications.create(Identifier("mineralas:remove_features")).add(
             ModificationPhase.REMOVALS, BiomeSelectors.foundInOverworld()
         ) { context: BiomeModificationContext ->
-            if (RemoveConfig().defaultFeatures.removeEnabled) {
-                RemoveConfig().defaultFeatures.toRemove.forEach { element ->
+            if (ConfigManager.readRemoveConfig().defaultFeatures.removeEnabled) {
+                ConfigManager.readRemoveConfig().defaultFeatures.toRemove.forEach { element ->
                     runCatching {
                         context.generationSettings.removeFeature(
                             RegistryKey.of(
@@ -32,8 +32,8 @@ object RemoveFeature {
                 }
             }
             if (FabricLoader.getInstance().isModLoaded("techreborn")) {
-                if (RemoveConfig().techRebornFeatures.removeEnabled) {
-                    RemoveConfig().techRebornFeatures.toRemove.forEach { element ->
+                if (ConfigManager.readRemoveConfig().techRebornFeatures.removeEnabled) {
+                    ConfigManager.readRemoveConfig().techRebornFeatures.toRemove.forEach { element ->
                         runCatching {
                             context.generationSettings.removeFeature(
                                 RegistryKey.of(
@@ -49,8 +49,8 @@ object RemoveFeature {
                 }
             }
             if (FabricLoader.getInstance().isModLoaded("modern_industrialization")) {
-                if (RemoveConfig().modernIndustrializationFeatures.removeEnabled) {
-                    RemoveConfig().modernIndustrializationFeatures.toRemove.forEach { element ->
+                if (ConfigManager.readRemoveConfig().modernIndustrializationFeatures.removeEnabled) {
+                    ConfigManager.readRemoveConfig().modernIndustrializationFeatures.toRemove.forEach { element ->
                         runCatching {
                             context.generationSettings.removeFeature(
                                 RegistryKey.of(
@@ -77,8 +77,8 @@ object RemoveFeature {
                 }
             }
             if (FabricLoader.getInstance().isModLoaded("ae2")) {
-                if (RemoveConfig().appliedEnergisticsFeatures.removeEnabled) {
-                    RemoveConfig().appliedEnergisticsFeatures.toRemove.forEach { element ->
+                if (ConfigManager.readRemoveConfig().appliedEnergisticsFeatures.removeEnabled) {
+                    ConfigManager.readRemoveConfig().appliedEnergisticsFeatures.toRemove.forEach { element ->
                         runCatching {
                             context.generationSettings.removeFeature(
                                 RegistryKey.of(
@@ -94,8 +94,8 @@ object RemoveFeature {
                 }
             }
             if (FabricLoader.getInstance().isModLoaded("powah")) {
-                if (RemoveConfig().powahFeatures.removeEnabled) {
-                    RemoveConfig().powahFeatures.toRemove.forEach { element ->
+                if (ConfigManager.readRemoveConfig().powahFeatures.removeEnabled) {
+                    ConfigManager.readRemoveConfig().powahFeatures.toRemove.forEach { element ->
                         runCatching {
                             context.generationSettings.removeFeature(
                                 RegistryKey.of(
@@ -111,8 +111,8 @@ object RemoveFeature {
                 }
             }
             if (FabricLoader.getInstance().isModLoaded("indrev")) {
-                if (RemoveConfig().indrevFeatures.removeEnabled) {
-                    RemoveConfig().indrevFeatures.toRemove.forEach { element ->
+                if (ConfigManager.readRemoveConfig().indrevFeatures.removeEnabled) {
+                    ConfigManager.readRemoveConfig().indrevFeatures.toRemove.forEach { element ->
                         runCatching {
                             context.generationSettings.removeFeature(
                                 RegistryKey.of(
@@ -127,8 +127,8 @@ object RemoveFeature {
                     }
                 }
             }
-            if (RemoveConfig().anotherFeatures.removeEnabled) {
-                RemoveConfig().anotherFeatures.toRemove.forEach { element ->
+            if (ConfigManager.readRemoveConfig().anotherFeatures.removeEnabled) {
+                ConfigManager.readRemoveConfig().anotherFeatures.toRemove.forEach { element ->
                     runCatching {
                         context.generationSettings.removeFeature(
                             RegistryKey.of(

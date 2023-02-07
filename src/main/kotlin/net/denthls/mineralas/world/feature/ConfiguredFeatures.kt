@@ -2,6 +2,7 @@ package net.denthls.mineralas.world.feature
 
 import net.denthls.mineralas.Mineralas
 import net.denthls.mineralas.config.Config
+import net.denthls.mineralas.config.ConfigManager
 import net.denthls.mineralas.world.feature.featureConfigs.MnFeatureConfig
 import net.denthls.mineralas.world.feature.featureConfigs.SampleFeatureConfig
 import net.denthls.mineralas.world.feature.removeWorldGen.RemoveVeinFeature
@@ -78,8 +79,12 @@ object ConfiguredFeatures {
 
     private fun register(list: List<String>) {
         val props: Config.Deposit = depositConfig(list[3])
-        if (props.depositEnabled && FabricLoader.getInstance().isModLoaded(Identifier(list[0]).namespace)) {
-            registerFeature(list[0], list[1], list[2], props.depositRarity, props.depositSize)
+        if (props.depositEnabled) {
+            if (FabricLoader.getInstance()
+                    .isModLoaded(Identifier(list[0]).namespace) || Identifier(list[0]).namespace == M
+            ) {
+                registerFeature(list[0], list[1], list[2], props.depositRarity, props.depositSize)
+            }
         }
     }
 
@@ -180,31 +185,31 @@ object ConfiguredFeatures {
 
     private fun depositConfig(name: String): Config.Deposit {
         return when (name) {
-            "iron" -> Config().ironDeposit
-            "coal" -> Config().coalDeposit
-            "copper" -> Config().copperDeposit
-            "gold" -> Config().goldDeposit
-            "lapis" -> Config().lapisDeposit
-            "redstone" -> Config().redstoneDeposit
-            "diamond" -> Config().diamondDeposit
-            "emerald" -> Config().emeraldDeposit
-            "antimony" -> Config().antimonyDeposit
-            "bauxite" -> Config().bauxiteDeposit
-            "tin" -> Config().tinDeposit
-            "iridium" -> Config().iridiumDeposit
-            "lead" -> Config().leadDeposit
-            "lignite_coal" -> Config().ligniteCoalDeposit
-            "mozanite" -> Config().mozaniteDeposit
-            "nickel" -> Config().nickelDeposit
-            "salt" -> Config().saltDeposit
-            "tungsten" -> Config().tungstenDeposit
-            "uranium" -> Config().uraniumDeposit
-            "ruby" -> Config().rubyDeposit
-            "sapphire" -> Config().sapphireDeposit
-            "silver" -> Config().silverDeposit
-            "quartz" -> Config().quartzDeposit
-            "nikolite" -> Config().nikoliteDeposit
-            else -> Config().ironDeposit
+            "iron" -> ConfigManager.readConfig().ironDeposit
+            "coal" -> ConfigManager.readConfig().coalDeposit
+            "copper" -> ConfigManager.readConfig().copperDeposit
+            "gold" -> ConfigManager.readConfig().goldDeposit
+            "lapis" -> ConfigManager.readConfig().lapisDeposit
+            "redstone" -> ConfigManager.readConfig().redstoneDeposit
+            "diamond" -> ConfigManager.readConfig().diamondDeposit
+            "emerald" -> ConfigManager.readConfig().emeraldDeposit
+            "antimony" -> ConfigManager.readConfig().antimonyDeposit
+            "bauxite" -> ConfigManager.readConfig().bauxiteDeposit
+            "tin" -> ConfigManager.readConfig().tinDeposit
+            "iridium" -> ConfigManager.readConfig().iridiumDeposit
+            "lead" -> ConfigManager.readConfig().leadDeposit
+            "lignite_coal" -> ConfigManager.readConfig().ligniteCoalDeposit
+            "mozanite" -> ConfigManager.readConfig().mozaniteDeposit
+            "nickel" -> ConfigManager.readConfig().nickelDeposit
+            "salt" -> ConfigManager.readConfig().saltDeposit
+            "tungsten" -> ConfigManager.readConfig().tungstenDeposit
+            "uranium" -> ConfigManager.readConfig().uraniumDeposit
+            "ruby" -> ConfigManager.readConfig().rubyDeposit
+            "sapphire" -> ConfigManager.readConfig().sapphireDeposit
+            "silver" -> ConfigManager.readConfig().silverDeposit
+            "quartz" -> ConfigManager.readConfig().quartzDeposit
+            "nikolite" -> ConfigManager.readConfig().nikoliteDeposit
+            else -> ConfigManager.readConfig().ironDeposit
         }
     }
 

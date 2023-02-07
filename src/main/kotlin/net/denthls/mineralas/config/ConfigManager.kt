@@ -29,8 +29,7 @@ object ConfigManager {
         } else removeConfigFile.writeText(json.encodeToString(readRemoveConfig()))
     }
 
-    private fun readConfig(): Config = json.decodeFromString(configFile.readText())
-
-    private fun readRemoveConfig(): RemoveConfig = json.decodeFromString(removeConfigFile.readText())
+    fun readConfig(): Config = json.decodeFromString(configFile.readText())
+    fun readRemoveConfig(): RemoveConfig = json.decodeFromString(removeConfigFile.readText())
 }
 

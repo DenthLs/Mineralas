@@ -12,12 +12,17 @@ import net.minecraft.item.ItemGroup
 import net.minecraft.item.ItemStack
 import net.minecraft.util.Identifier
 import org.slf4j.Logger
+import kotlin.random.Random
 
 
 object Mineralas : ModInitializer {
 
     const val MI = "mineralas"
     val logger: Logger = LogUtils.getLogger()
+
+    fun random(value: Float): Boolean {
+        return Random.nextFloat() < value
+    }
 
     val samplesGroup: ItemGroup =
         FabricItemGroupBuilder.build(Identifier(MI, "samples")) { ItemStack(SamplesRegistry.STONE_SAMPLE) }

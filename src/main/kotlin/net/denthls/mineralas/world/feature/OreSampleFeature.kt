@@ -1,6 +1,7 @@
 package net.denthls.mineralas.world.feature
 
 import com.mojang.serialization.Codec
+import net.denthls.mineralas.Mineralas.random
 import net.denthls.mineralas.registry.SamplesRegistry.STONE_SAMPLE
 import net.denthls.mineralas.registry.SamplesRegistry.samples
 import net.denthls.mineralas.world.GenerateDeposit
@@ -19,7 +20,6 @@ import net.minecraft.world.gen.feature.Feature
 import net.minecraft.world.gen.feature.OreConfiguredFeatures
 import net.minecraft.world.gen.feature.OreFeatureConfig
 import net.minecraft.world.gen.feature.util.FeatureContext
-import kotlin.random.Random
 
 
 open class OreSampleFeature(configCodec: Codec<MnFeatureConfig>) : Feature<MnFeatureConfig>(configCodec) {
@@ -30,7 +30,7 @@ open class OreSampleFeature(configCodec: Codec<MnFeatureConfig>) : Feature<MnFea
 
         val blockState: BlockState = Registry.BLOCK.get(config.sampleId).defaultState
         val chunkPos = ChunkPos(context.origin)
-        val height = if (Random.nextFloat() > 0.5) "stone" else "deepslate"
+        val height = if (random(0.5f)) "stone" else "deepslate"
         var orePath = config.oreId.path
         val oreNamespace = config.oreId.namespace
         if (height == "deepslate") orePath = "deepslate_$orePath"
@@ -45,23 +45,6 @@ open class OreSampleFeature(configCodec: Codec<MnFeatureConfig>) : Feature<MnFea
                 }
             }
         }
-        var count = 0
-        (chunkPos.startX..chunkPos.endX).forEach { x ->
-            (chunkPos.startZ..chunkPos.endZ).forEach { z ->
-                (50..160).forEach y@{ y ->
-                    val blockPos = BlockPos(x, y, z)
-                    if (surfaceContains(world.getBlockState(blockPos)) && world.getBlockState(blockPos.up()).isAir
-                        && world.getBlockState(blockPos.up(2)).isAir
-                        && Random.nextInt(1, 100) > 94
-                        && blockPos.up().getNeighbor(world)
-                    ) {
-                        world.setBlockState(blockPos.up(), blockState, 3)
-                        if (count > 7) return true else ++count
-                        return@y
-                    }
-                }
-            }
-        }
         GenerateDeposit.generateOre(
             BlockPos(ChunkPos(context.origin).centerX, 80, ChunkPos(context.origin).centerZ),
             world,
@@ -69,6 +52,23 @@ open class OreSampleFeature(configCodec: Codec<MnFeatureConfig>) : Feature<MnFea
             createTarget(height, oreId),
             height
         )
+        var count = 0
+        (chunkPos.startX..chunkPos.endX).forEach { x ->
+            (chunkPos.startZ..chunkPos.endZ).forEach { z ->
+                (50..160).forEach y@{ y ->
+                    val blockPos = BlockPos(x, y, z)
+                    if (surfaceContains(world.getBlockState(blockPos)) && world.getBlockState(blockPos.up()).isAir
+                        && world.getBlockState(blockPos.up(2)).isAir
+                        && random(0.06f)
+                        && blockPos.up().getNeighbor(world)
+                    ) {
+                        world.setBlockState(blockPos.up(), blockState, 3)
+                        if (count > 12) return true else ++count
+                        return@y
+                    }
+                }
+            }
+        }
         return true
     }
 

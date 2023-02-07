@@ -1,8 +1,10 @@
 package net.denthls.mineralas.block
 
 import net.minecraft.block.*
+import net.minecraft.entity.LivingEntity
 import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.item.ItemPlacementContext
+import net.minecraft.item.ItemStack
 import net.minecraft.server.network.ServerPlayerEntity
 import net.minecraft.state.StateManager
 import net.minecraft.util.ActionResult
@@ -72,6 +74,22 @@ class SampleBlock(settings: Settings) : Block(settings) {
             neighborState.fluidState == Fluids.WATER.defaultState) {
             world.breakBlock(pos, false)
         }*/
+        if (direction == Direction.DOWN && !neighborState.isSolidBlock(world, pos)) {
+            world.breakBlock(pos, false)
+        }
         return super.getStateForNeighborUpdate(state, direction, neighborState, world, pos, neighborPos)
     }
+
+    override fun onPlaced(
+        world: World?,
+        pos: BlockPos?,
+        state: BlockState?,
+        placer: LivingEntity?,
+        itemStack: ItemStack?
+    ) {
+        super.onPlaced(world, pos, state, placer, itemStack)
+    }
+
+    companion object
+
 }
