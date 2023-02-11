@@ -64,8 +64,7 @@ object ConfiguredFeatures {
         featureList("$IR:tin_ore", "tin"),
         featureList("$IR:silver_ore", "silver"),
         featureList("$IR:lead_ore", "lead"),
-        featureList("$IR:nikolite_ore", "nikolite"),
-
+        featureList("$IR:nikolite_ore", "nikolite")
         )
 
     fun generateOres() {
@@ -95,7 +94,7 @@ object ConfiguredFeatures {
         rarity: Int,
         size: Int
     ) {
-        val id = Identifier(featureId)
+        val id = Identifier(Mineralas.MI, Identifier(featureId).namespace + "_" + Identifier(featureId).path)
         val feature: Feature<MnFeatureConfig> = OreSampleFeature(MnFeatureConfig.CODEC)
         val configuredFeature: ConfiguredFeature<MnFeatureConfig, OreSampleFeature> =
             ConfiguredFeature<MnFeatureConfig, OreSampleFeature>(
@@ -120,7 +119,6 @@ object ConfiguredFeatures {
             GenerationStep.Feature.VEGETAL_DECORATION,
             RegistryKey.of(Registry.PLACED_FEATURE_KEY, id)
         )
-
     }
 
     fun removeVein(
@@ -163,7 +161,7 @@ object ConfiguredFeatures {
             ConfiguredFeature<SampleFeatureConfig, StoneSampleFeature>(
                 feature as StoneSampleFeature,
                 SampleFeatureConfig(
-                    Identifier("mineralas", blockPath), 98
+                    Identifier("mineralas", blockPath), ConfigManager.readConfig().stoneSample.sampleRarity
                 )
             )
 
@@ -176,11 +174,13 @@ object ConfiguredFeatures {
         Registry.register(BuiltinRegistries.CONFIGURED_FEATURE, id, configuredFeature)
         Registry.register(BuiltinRegistries.PLACED_FEATURE, id, placedFeature)
 
-        BiomeModifications.addFeature(
-            BiomeSelectors.foundInOverworld(),
-            GenerationStep.Feature.VEGETAL_DECORATION,
-            RegistryKey.of(Registry.PLACED_FEATURE_KEY, id)
-        )
+        if (ConfigManager.readConfig().stoneSample.sampleEnabled) {
+            BiomeModifications.addFeature(
+                BiomeSelectors.foundInOverworld(),
+                GenerationStep.Feature.VEGETAL_DECORATION,
+                RegistryKey.of(Registry.PLACED_FEATURE_KEY, id)
+            )
+        }
     }
 
     private fun depositConfig(name: String): Config.Deposit {

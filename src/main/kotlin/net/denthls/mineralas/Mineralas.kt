@@ -11,6 +11,7 @@ import net.fabricmc.fabric.api.client.itemgroup.FabricItemGroupBuilder
 import net.minecraft.item.ItemGroup
 import net.minecraft.item.ItemStack
 import net.minecraft.util.Identifier
+import net.minecraft.util.registry.Registry
 import org.slf4j.Logger
 import kotlin.random.Random
 
@@ -25,7 +26,18 @@ object Mineralas : ModInitializer {
     }
 
     val samplesGroup: ItemGroup =
-        FabricItemGroupBuilder.build(Identifier(MI, "samples")) { ItemStack(SamplesRegistry.STONE_SAMPLE) }
+        FabricItemGroupBuilder.build(Identifier(MI, "samples")) {
+            ItemStack(
+                Registry.ITEM.get(
+                    Identifier(
+                        MI,
+                        "stone_sample"
+                    )
+                )
+            )
+        }
+
+    val samples = SamplesRegistry.list(SamplesRegistry.samplesId)
 
     override fun onInitialize() {
         logger.info("Mineralas Initialized")
@@ -36,5 +48,6 @@ object Mineralas : ModInitializer {
         RemoveFeature
         Tags
         ConfigManager
+        logger.info(samples.toString())
     }
 }

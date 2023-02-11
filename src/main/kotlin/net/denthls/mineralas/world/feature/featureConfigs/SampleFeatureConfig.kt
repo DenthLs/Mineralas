@@ -8,15 +8,15 @@ import net.minecraft.world.gen.feature.FeatureConfig
 
 class SampleFeatureConfig(
     val sampleId: Identifier,
-    val rarity: Int
+    val rarity: Float
 ) : FeatureConfig {
     companion object {
         val CODEC: Codec<SampleFeatureConfig> =
             RecordCodecBuilder.create { instance: RecordCodecBuilder.Instance<SampleFeatureConfig> ->
                 instance.group(
                     Identifier.CODEC.fieldOf("sampleId").forGetter(SampleFeatureConfig::sampleId),
-                    Codecs.POSITIVE_INT.fieldOf("rarity").forGetter(SampleFeatureConfig::rarity),
-                ).apply(instance) { sampleId: Identifier, rarity: Int ->
+                    Codecs.POSITIVE_FLOAT.fieldOf("rarity").forGetter(SampleFeatureConfig::rarity),
+                ).apply(instance) { sampleId: Identifier, rarity: Float ->
                     SampleFeatureConfig(sampleId, rarity)
                 }
             }

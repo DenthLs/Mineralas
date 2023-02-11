@@ -1,8 +1,7 @@
 package net.denthls.mineralas.datagen.models
 
 import net.denthls.mineralas.Mineralas
-import net.denthls.mineralas.registry.SamplesRegistry.STONE_SAMPLE
-import net.denthls.mineralas.registry.SamplesRegistry.samples
+import net.denthls.mineralas.registry.SamplesRegistry.samplesId
 import net.fabricmc.fabric.api.datagen.v1.FabricDataGenerator
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricModelProvider
 import net.minecraft.data.client.*
@@ -15,8 +14,8 @@ class ModelGen(dataGenerator: FabricDataGenerator) : FabricModelProvider(dataGen
     private val _ore: TextureKey = TextureKey.of("_ore")
     private val stone: TextureKey = TextureKey.of("stone")
     override fun generateBlockStateModels(blockStateModelGenerator: BlockStateModelGenerator) {
-        samples.minus(STONE_SAMPLE).forEach { element ->
-            registerSample(blockStateModelGenerator, Registry.BLOCK.getId(element).path)
+        samplesId.minus("stone_sample").forEach { element ->
+            registerSample(blockStateModelGenerator, element)
         }
     }
 

@@ -15,7 +15,6 @@ class RemoveVeinFeature(configCodec: Codec<OreFeatureConfig>?) : Feature<OreFeat
     private val listIron = listOf(Blocks.DEEPSLATE_IRON_ORE.defaultState, Blocks.RAW_IRON_BLOCK.defaultState)
 
     override fun generate(context: FeatureContext<OreFeatureConfig>): Boolean {
-        // Actually not optimized, but now IDK how to improve it
         val world: StructureWorldAccess = context.world
         val chunkPos = ChunkPos(context.origin)
         chunkPos.startX.rangeTo(chunkPos.endX).forEach { x ->

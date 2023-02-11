@@ -86,10 +86,4 @@ data class RemoveConfig(
     data class Comment(
         val _comment: String = ""
     )
-
-    @Serializable
-    data class Features(
-        val logEnabled: Boolean = false,
-        val biomes: List<String> = listOf("")
-    )
 }
