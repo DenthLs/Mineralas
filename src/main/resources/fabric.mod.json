@@ -3,13 +3,13 @@
   "id": "mineralas",
   "version": "1.0.0",
   "name": "Mineralas",
-  "description": "Mod with configurable ore generation",
+  "description": "Custom Ore Generation Mod",
   "authors": [
     "DenthLs"
   ],
   "contact": {
     "homepage": "Empty for a while",
-    "sources": "https://github.com/DenthLs/Mineralas"
+    "sources": "Empty for a while"
   },
   "license": "MIT",
   "icon": "assets/mineralas/icon.png",
@@ -32,13 +32,12 @@
     "mineralas.mixins.json"
   ],
   "depends": {
-    "fabricloader": ">=0.14.11",
+    "fabricloader": ">=0.14.6",
     "fabric": "*",
     "fabric-language-kotlin": ">=1.7.3+kotlin.1.6.20",
     "minecraft": "1.18.2"
   },
   "suggests": {
-    "flamingo": "*",
-    "modmenu": "3.2.4"
+    "flamingo": "*"
   }
 }
