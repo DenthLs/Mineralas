@@ -169,7 +169,7 @@ object GenerateDeposit {
                                                                         chunkSectionCache.getBlockState(
                                                                             pos
                                                                         )
-                                                                    }, 0.5f, target, mutable
+                                                                    }, 1.0f, target, mutable
                                                                 )
                                                             ) {
                                                                 chunkSection.setBlockState(
@@ -213,7 +213,7 @@ object GenerateDeposit {
         target: OreFeatureConfig.Target,
         pos: BlockPos.Mutable?
     ): Boolean = when {
-        !target.target.test(state, Random.asJavaRandom()) -> true
+        !target.target.test(state, Random.asJavaRandom()) -> false
         shouldNotDiscard(discardOnAirChance) -> true
         else -> !Feature.isExposedToAir(posToState, pos)
     }
