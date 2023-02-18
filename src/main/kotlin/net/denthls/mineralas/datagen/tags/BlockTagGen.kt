@@ -8,7 +8,7 @@ import net.minecraft.util.registry.Registry
 
 
 class BlockTagGen(dataGenerator: FabricDataGenerator) :
-    FabricTagProvider<Block>(dataGenerator, Registry.BLOCK, "Mineralas Block Tags") {
+    FabricTagProvider<Block>(dataGenerator, Registry.BLOCK) {
     override fun generateTags() {
         samples.forEach { element ->
             getOrCreateTagBuilder(Tags.SAMPLES).add(element)

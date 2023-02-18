@@ -14,7 +14,6 @@ import java.util.function.Function
 import kotlin.math.cos
 import kotlin.math.sin
 import kotlin.random.Random
-import kotlin.random.asJavaRandom
 
 object GenerateDeposit {
     fun generateOre(
@@ -213,7 +212,7 @@ object GenerateDeposit {
         target: OreFeatureConfig.Target,
         pos: BlockPos.Mutable?
     ): Boolean = when {
-        !target.target.test(state, Random.asJavaRandom()) -> false
+        !target.target.test(state, net.minecraft.util.math.random.Random.create()) -> false
         shouldNotDiscard(discardOnAirChance) -> true
         else -> !Feature.isExposedToAir(posToState, pos)
     }
