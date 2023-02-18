@@ -5,10 +5,6 @@ import net.fabricmc.loader.api.FabricLoader
 
 @Serializable
 data class Config(
-    val _comment: Comment = Comment(
-        "First line is the rarity, the lower the value, the more deposits",
-        "Second line is the size of deposit"
-    ),
     val stoneSample: Sample = Sample(true, 0.02f),
     val ironDeposit: Deposit = Deposit(true, 50, 96),
     val copperDeposit: Deposit = Deposit(true, 30, 128),
